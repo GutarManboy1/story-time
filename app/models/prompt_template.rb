@@ -1,0 +1,2 @@
+class PromptTemplate < ApplicationRecord
+end
