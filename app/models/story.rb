@@ -1,4 +1,7 @@
 class Story < ApplicationRecord
-  belongs_to :user_id
-  belongs_to :prompt_template_id
+  belongs_to :user
+  belongs_to :prompt_template
+
+  validates :title, presence: true
+  validates :system_prompt, presence: true
 end
