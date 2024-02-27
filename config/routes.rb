@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'stories/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -9,4 +10,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :stories, only: [:new, :create, :show]
+  resources :flashcards do
+    resources :flashcards, only:[:index, :show, :create, :update]
+  end
+  resources :flashcards, only: [:destroy]
 end
