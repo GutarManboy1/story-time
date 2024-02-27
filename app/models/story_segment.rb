@@ -1,3 +1,3 @@
 class StorySegment < ApplicationRecord
-  belongs_to :story_id
+  belongs_to :story
 end
