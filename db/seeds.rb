@@ -102,6 +102,8 @@ template = PromptTemplate.new(
   SYSTEM_PROMPT
 )
 
+template.save!
+
 # OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------
 # OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------
 # OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------
