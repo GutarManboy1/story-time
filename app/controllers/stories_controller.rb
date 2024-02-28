@@ -3,6 +3,10 @@ class StoriesController < ApplicationController
     @stories = Story.all
   end
 
+  def index
+    @stories = Story.all
+  end
+
   def new
     @story = Story.new
   end
