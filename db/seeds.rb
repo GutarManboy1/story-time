@@ -14,7 +14,7 @@ end
 giraffe_people = [
   { email: "Zergyjanus@gmail.com", password: "giraffe" },
   { email: "glenntorrens@gmail.com", password: "giraffe" },
-  { email: "codingDane@bananas.comorsomething", password: "giraffe" }
+  { email: "avoeler@gmail.com", password: "giraffe" }
 ]
 giraffe_people.each do |banana|
   User.create!(email: banana.email, password: banana.password)
