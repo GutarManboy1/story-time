@@ -496,21 +496,19 @@ end
 # ----------OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO----------OOOOOOOOOO
 #                  F L A S H    C A R D    S E E D S
 
+# all_segments = StorySegment.all
+# all_users = User.all
 
-all_segments = StorySegment.all
-all_users = User.all
-
-3.times do
-  segment = all_segments.sample
-  serial = segment.message
-  data = JSON.parse(serial)
-  all_words = data["paragraphs"].join(" ").scan(/\b\w+\b/)
-  word = all_words.sample
-  file = URI.open("https://api.dictionaryapi.dev/api/v2/entries/en/#{word}")
-  document = JSON.parse(file)
-  p document
-end
-
+# 3.times do
+#   segment = all_segments.sample
+#   serial = segment.message
+#   data = JSON.parse(serial)
+#   all_words = data["paragraphs"].join(" ").scan(/\b\w+\b/)
+#   word = all_words.sample
+#   file = URI.open("https://api.dictionaryapi.dev/api/v2/entries/en/#{word}")
+#   document = JSON.parse(file)
+#   p document
+# end
 
 # t.string "excerpt"
 # t.integer "card_type"
