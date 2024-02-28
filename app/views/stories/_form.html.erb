@@ -1,6 +1,9 @@
-<h1>Form</h1>
-<%= simple_form_for @story do |f| %>
-  <%= f.input :username, class: "form-control", id: "exampleFormControlSelect1" %>
-  <%= f.input :password, class: "form-control", id: "exampleFormControlSelect1" %>
+<div data-controller="keywords">
+  <%= simple_form_for @story do |f| %>
+  <%= f.input :genre, collection: ["Adventure", "Horror", "Sci-Fi"], prompt: "Select a Genre" %>
+  <%= f.input :length, collection: ["Short", "Medium", "Long"], prompt: "Select Length" %>
+  <%= f.input :english_difficulty, collection: ["Beginner", "Intermediate", "Advanced"], prompt: "Select Difficulty" %>
+  <%= f.input :keywords, as: :string %>
   <%= f.button :submit %>
 <% end %>
+</div>
