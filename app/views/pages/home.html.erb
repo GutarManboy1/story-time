@@ -1,5 +1,27 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<div class="container">
-  <button class="btn btn-outline-primary">Read now</button>
+
+<% if user_signed_in? %>
+<h1>Story Time</h1>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <%= link_to 'Start New Story', new_story_path, class: "btn btn-primary" %>
+  <%= link_to 'Library', stories_path, class: "btn btn-success" %>
+  <%= link_to 'Flash Cards', flashcards_path, class:"btn btn-info" %>
 </div>
+<% else %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url();">
+  <div class="container">
+    <h1>Story Time</h1>
+    <p>Learn English Through Your Own AI Storyteller</p>
+    <a class="btn btn-primary"> <%=link_to 'Start Now', new_user_session_path%> </a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+</div>
+<% end %>
