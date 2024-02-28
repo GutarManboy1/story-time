@@ -1,0 +1,15 @@
+{ 
+  "segment": 1,
+  "title": "The Maiden and the Dragon",
+  "paragraphs": [
+    "In the mystical land of France, there lived a courageous maiden named Elise. She was known far and wide for her brave spirit and kind heart.",
+    "One day, a fearsome dragon descended upon the peaceful village, causing chaos and destruction. The villagers trembled in fear, unsure of what to do.",
+    "Elise knew she had to do something to protect her home. With determination in her eyes, she set off towards the mountains where the dragon had made its lair.",
+    "As she climbed higher and higher, the air grew colder and the sky darker. Elise's heart beat faster, but she did not waver in her resolve.",
+    "Finally, she reached the entrance of the dragon's cave, ready to face the beast and bring peace back to her village."
+  ],
+  "choices": [
+    "1. Enter the dragon's cave and confront the beast.",
+    "2. Wait outside and observe the dragon's movements."
+  ]
+}
