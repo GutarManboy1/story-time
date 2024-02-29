@@ -63,7 +63,7 @@ template = PromptTemplate.new(
   The USER will indicate their CHOICE by typing either "1" or "2" in chat.
   The NARRATOR should write the next SEGMENT based on the USER's CHOICE.
   A STORY should contain a minimum of %{length_plus} SEGMENTS, but each chat MESSAGE only contains 1 of those SEGMENTS.
-  After the USER has made %{length_plus} CHOICES in chat, each subsequent USER CHOICE has a 35% CHANCE to generate the STORY ENDING SEGMENT.
+  After the USER has made %{length_plus} CHOICES in chat, each subsequent USER CHOICE has a 35%% CHANCE to generate the STORY ENDING SEGMENT.
   An ENDING SEGMENT can be either GOOD or BAD.
   A GOOD ENDING should resolve by the protagonist accomplishing their goal.
   A BAD ENDING should resolve by the protagonist suddenly dying, being killed, or experiencing tragedy.
@@ -72,7 +72,7 @@ template = PromptTemplate.new(
   The JSON for the first SEGMENT  should also have a "title: $title" key-value pair inserted after the "segment:" key-value pair.
   The ENDING SEGMENT JSON does not need the "choices:" key-value pair.
   The NARRATOR must not write anything outside of the JSON.
-  The genre of the STORY will be %{genre}.
+  The genre of the STORY will be a %{genre} story.
   In addition to the overall structure above, incorporate the following words/phrases (separated by commas) as THEMES, ELEMENTS or CHARACTERS within the story as appropriate:
   %{themes}
   The THEMES, ELEMENTS and CHARACTERS do not need to be introduced all at once, but should be included by the end of the %{length_plus}th story segment.
@@ -504,7 +504,7 @@ end
 all_segments = StorySegment.where(role: "assistant")
 all_users = User.all
 
-50.times do
+10.times do
   begin
     segment = all_segments.sample
     serial = segment.message
