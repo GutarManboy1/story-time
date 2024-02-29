@@ -3,33 +3,6 @@ require 'json'
 class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
-    puts "this is inside of story"
-    p @story
-    big_bubba = []
-    segments = StorySegment.where(story_id: @story)
-    puts "these are the segments"
-    p segments
-    segments.each do |segment|
-      puts "this is a segment"
-      p segment
-      current_hash = {
-        role: segment.role,
-        content: segment.message
-      }
-      puts "this is the current_hash"
-      p current_hash
-      big_bubba << current_hash
-    end
-    puts "this is big bubba hi"
-    p big_bubba
-    last_hash = {
-      role: 'user',
-      content: "1"
-    }
-    big_bubba << last_hash
-    new_segment = OpenaiService.new(big_bubba).add_segment_call
-    segment_data = JSON.parse(new_segment)
-    @paragraph = segment_data["paragraphs"][0]
   end
 
   def index
