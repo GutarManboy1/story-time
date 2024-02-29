@@ -24,7 +24,7 @@ class StorySegmentsController < ApplicationController
     segments.each do |segment|
       current_hash = {
         role: segment.role,
-        content: segment.safe_message,
+        content: segment.message,
       }
       big_bubba << current_hash
     end
