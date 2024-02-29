@@ -1,6 +1,7 @@
 require "open-uri"
 
 class StorySegment < ApplicationRecord
+
   # after_save if: -> { saved_change_to_name? || saved_change_to_ingredients? } do
   #   set_content
   #   set_photo
@@ -10,8 +11,10 @@ class StorySegment < ApplicationRecord
   scope :from_user, -> {where(role: :user)}
   has_one_attached :photo
 
+
   belongs_to :story
   has_many :flashcards
+
 
   def first_paragraph
     begin
@@ -19,6 +22,12 @@ class StorySegment < ApplicationRecord
     rescue
       nil
     end
+  end
+
+  def safe_message
+      JSON.parse(message)
+    rescue
+      message
   end
 
   private

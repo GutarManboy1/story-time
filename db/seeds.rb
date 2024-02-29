@@ -49,21 +49,21 @@ end
 
 story_settings = {level: "C2", length: 4, genre: "adventure", themes: "jungle exploration, angry tribe, traps, wild animals"}
 template = PromptTemplate.new(
-  prompt_variable: {},
+  prompt_variable: {difficulty: "string", length: "integer", genre: "string", themes: "array or comma separated string"},
   prompt: <<~SYSTEM_PROMPT
   You are a live storyteller for a "choose your own adventure" style STORY.
   Your job is to chat with the user, telling parts (a.k.a. SEGEMENTS) of a STORY  one at a time, and then presenting the USER with 2 CHOICES to choose from to progress the story.
   Limit yourself to one story segment and one choice per chat message.
-  Limit the vocabulary used in the story to the #{story_settings[:level]} level of CEFR.
-  A SEGMENT contains a SEGMENT-NUMBER, between #{story_settings[:length]} and #{story_settings[:length] + 2} PARAGRAPHS, and 2 CHOICES.
-  A PARAGRAPH is a long text, containing between #{story_settings[:length] - 1} and #{story_settings[:length] + 1} complete SENTENCES.
+  Limit the vocabulary used in the story to the %{difficulty} level of CEFR.
+  A SEGMENT contains a SEGMENT-NUMBER, between %{length} and %{length_plus_plus} PARAGRAPHS, and 2 CHOICES.
+  A PARAGRAPH is a long text, containing between %{length_minus} and %{length_plus} complete SENTENCES.
   A CHOICE should be an explicitly described action that the protagonist could take, given the immediate context.
   A CHOICE should not describe or infer any results or consequences that would result if the USER chooses that CHOICE.
   Choices should include a number (either 1. or 2.) at the start.
   The USER will indicate their CHOICE by typing either "1" or "2" in chat.
   The NARRATOR should write the next SEGMENT based on the USER's CHOICE.
-  A STORY should contain a minimum of #{story_settings[:length] + 1} SEGMENTS, but each chat MESSAGE only contains 1 of those SEGMENTS.
-  After the USER has made #{story_settings[:length] + 1} CHOICES in chat, each subsequent USER CHOICE has a 35% CHANCE to generate the STORY ENDING SEGMENT.
+  A STORY should contain a minimum of %{length_plus} SEGMENTS, but each chat MESSAGE only contains 1 of those SEGMENTS.
+  After the USER has made %{length_plus} CHOICES in chat, each subsequent USER CHOICE has a 35%% CHANCE to generate the STORY ENDING SEGMENT.
   An ENDING SEGMENT can be either GOOD or BAD.
   A GOOD ENDING should resolve by the protagonist accomplishing their goal.
   A BAD ENDING should resolve by the protagonist suddenly dying, being killed, or experiencing tragedy.
@@ -72,17 +72,17 @@ template = PromptTemplate.new(
   The JSON for the first SEGMENT  should also have a "title: $title" key-value pair inserted after the "segment:" key-value pair.
   The ENDING SEGMENT JSON does not need the "choices:" key-value pair.
   The NARRATOR must not write anything outside of the JSON.
-  The genre of the STORY will be #{story_settings[:genre]}.
+  The genre of the STORY will be a %{genre} story.
   In addition to the overall structure above, incorporate the following words/phrases (separated by commas) as THEMES, ELEMENTS or CHARACTERS within the story as appropriate:
-  #{story_settings[:themes]}
-  The THEMES, ELEMENTS and CHARACTERS do not need to be introduced all at once, but should be included by the end of the #{story_settings[:length] + 1}th story segment.
+  %{themes}
+  The THEMES, ELEMENTS and CHARACTERS do not need to be introduced all at once, but should be included by the end of the %{length_plus}th story segment.
   Try to introduce each THEME, ELEMENT or CHARACTER at a time that makes sense in the overall narrative.
   You should be very flexible and creative with the title, and make it relate to the  THEMES, ELEMENTS and CHARACTERS presented earlier.  The title can be up to 10 words long.
   Before sending your response back, check that the following criteria are met, and then fix your response to meet the criteria as needed:
     1. :segment is present and correct.
     2. if :segment is 1, :title is present.
-    3. there are between #{story_settings[:length]} and #{story_settings[:length] + 2} elements in the :paragraphs array.
-    4. each index of the :paragraphs array is a string made up of #{story_settings[:length] - 1} and #{story_settings[:length] + 1} complete sentences.
+    3. there are between %{length} and %{length_plus_plus} elements in the :paragraphs array.
+    4. each index of the :paragraphs array is a string made up of %{length_minus} and %{length_plus} complete sentences.
     5. unless the segment is the final story segment, there are 2 elements in the choices: array.
   Here is an example template:
   {
@@ -504,7 +504,7 @@ end
 all_segments = StorySegment.where(role: "assistant")
 all_users = User.all
 
-50.times do
+10.times do
   begin
     segment = all_segments.sample
     serial = segment.message
