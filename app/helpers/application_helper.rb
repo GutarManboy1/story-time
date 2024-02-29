@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def welcome_message
     if user_signed_in?
       "Welcome, #{current_user.email}"
