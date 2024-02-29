@@ -1,3 +1,4 @@
 <h1><%= @story.title %></h1>
 <p>Find me in app/views/stories/show.html.erb</p>
-<%= link_to game_path(game), class: "game-link" do %>
+<%= link_to 'Begin Reading', story_segment_path(@story_segment) %>
+<%= link_to 'Back to Menu', root_path %>

@@ -4,9 +4,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @segments = StorySegment.where(story: @story)
-    @story_segment = @segments[1]
-    @segment_num = @story_segment.order
-    @paragraphs = story_segment.
+    @story_segment = @segments.last
   end
 
   def index
@@ -45,7 +43,7 @@ class StoriesController < ApplicationController
       first_segment_params = {
         order: 1,
         message: first_segment,
-        role: 'system',
+        role: 'assistant',
         story: @story
       }
       StorySegment.create!(first_segment_params)
