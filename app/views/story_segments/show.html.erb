@@ -5,6 +5,11 @@
     <% if @story_segment.role == "assistant" %>
       <% @paragraphs.each_with_index do |paragraph, index| %>
         <p><%= paragraph %></p>
+        <% if @story_segment.photo.attached? %>
+          <%= cl_image_tag @story_segment.photo.key, width: 500, height: 500, crop: :fill %>
+        <% else %>
+          <p>No image attached.</p>
+        <% end %>
         <% if @pagy_a.pages == @pagy_a.page && index == @paragraphs.size - 1 && @choices.present? %>
           <% @choices.each_with_index do |choice, index| %>
             <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
