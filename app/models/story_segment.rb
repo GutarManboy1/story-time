@@ -10,7 +10,6 @@ class StorySegment < ApplicationRecord
   scope :from_user, -> {where(role: :user)}
   has_one_attached :photo
 
-
   belongs_to :story
   has_many :flashcards
 
@@ -29,21 +28,19 @@ class StorySegment < ApplicationRecord
       message
   end
 
-  private
-
-  def set_photo
+  def set_photo(prompt)
     client = OpenAI::Client.new
     response = client.images.generate(parameters:
       {
-        prompt: "Create an image of something awesome",
-        size: "256x256"
+        prompt: "#{prompt} in the style of fantasy art",
+        size: "1024x1024"
       })
 
     url = response["data"][0]["url"]
     file = URI.open(url)
 
     photo.purge if photo.attached?
-    photo.attach(io: file, filename: "ai_generated_image.png", content_type: "image/png")
+    photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
     return photo
   end
 end

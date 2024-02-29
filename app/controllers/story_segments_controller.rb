@@ -48,9 +48,10 @@ class StorySegmentsController < ApplicationController
       story: @story_segment.story
     }
     new_segment = StorySegment.new(segment_params)
+    img_prompt = new_segment.first_paragraph
+    new_segment.set_photo(img_prompt)
     new_segment.save!
     redirect_to story_segment_path(new_segment)
-    # @paragraph = segment_data["paragraphs"][0]       use this if you wanna check if there is anything inside of the data
   end
 
   private

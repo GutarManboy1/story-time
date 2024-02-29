@@ -46,7 +46,10 @@ class StoriesController < ApplicationController
         role: 'assistant',
         story: @story
       }
-      StorySegment.create!(first_segment_params)
+      new_segment = StorySegment.new(first_segment_params)
+      img_prompt = new_segment.first_paragraph
+      new_segment.set_photo(img_prompt)
+      new_segment.save!
       redirect_to story_path(@story)
     else
       render :new, status: :unprocessable_entity
