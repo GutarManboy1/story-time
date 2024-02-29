@@ -1,5 +1,42 @@
-<h1>Library</h1>
-<p class="d-inline-flex gap-1">
-  <button type="button" class="btn btn-primary" data-bs-toggle="button">Continue Reading</button>
-   <button type="button" class="btn btn-primary" data-bs-toggle="button">Completed Stories</button>
-</p>
+<h1 class="text-center">Library</h1>
+<!--ListsContainer-->
+<div class="container">
+  <div class="row">
+    <div class="col col-md-6">
+      <!--ContinueReadingStoriesList-->
+      <button type="button" class="btn btn-primary" data-bs-toggle="button">Continue Reading</button>
+      <div class="list-group">
+        <% 3.times do %>
+          <% @stories.each do |story|%>
+            <div class= "border p-3">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> <%= story.title %>  </h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
+              <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <!--FinishedStoriesList-->
+      <button type="button" class="btn btn-primary" data-bs-toggle="button">Completed Stories</button>
+      <div class="list-group">
+        <% 3.times do %>
+          <% @stories.each do |story|%>
+            <div class= "border p-3">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= story.title %></h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
+              <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

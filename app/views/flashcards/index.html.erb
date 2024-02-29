@@ -1,2 +1,36 @@
-<h1>Flashcards</h1>
-<button type="button" class="btn btn-primary btn-lg">See My Cards</button>
+<h1 class="text-center">Flashcards</h1>
+<button type="button" class="btn btn-primary btn-lg" id="toggleButton">See My Cards</button>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="cards-container col">
+      <% @flashcards.each do |flashcard| %>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"> title</h5>
+          <p class="card-text">story blurb</p>
+          <a href="#" class="btn btn-primary">See Cards</a>
+      </div>
+    </div>
+  </div>
+
+      <% end %>
+    </div>
+
+    <div class="cards-container col">
+      <% @flashcards.each do |flashcard| %>
+      <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Title</h5>
+          <p class="card-text">blurb</p>
+          <a href="#" class="btn btn-primary">See Cards</a>
+      </div>
+    </div>
+  </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
