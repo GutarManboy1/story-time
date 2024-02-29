@@ -1,14 +1,3 @@
-<%# <div>
-  <%= simple_form_for @story do |f| %>
-  <%# <%= f.input :genre, collection: ["Adventure", "Fairy Tale", "Fantasy", "Horror", "Love", "Mystery", "Sci-Fi"], prompt: "Select a Genre" %>
-  <%# <%= f.input :length, collection: ["Short", "Medium", "Long"], prompt: "Select Length" %> %>
-  <%# <%= f.input :english_difficulty, collection: ["Beginner", "Intermediate", "Advanced"], prompt: "Select Difficulty" %> %>
-  <%# <%= f.input :keywords, as: :string %> %>
-  <%# <%= f.button :submit %> %>
-<%# <% end %> %>
-<%# </div> %> %> %>
-
-
 <form action="/stories" method="post">
   <!-- CSRF Token for security -->
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
