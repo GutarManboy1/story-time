@@ -7,11 +7,18 @@ class StorySegmentsController < ApplicationController
 
   def show
     @story_segment = StorySegment.find(params[:id])
+
+    # @message_hash = JSON.parse(@story_segment.message)
+    # @paragraphs = @message_hash["paragraphs"]
+    # @segment_num = @message_hash["segment"]
+    # @choices = @message_hash["choices"]
+
     # @pagy, @paragraphs = pagy(@parsed_segment["paragraphs"])
     # @parsed_segment = JSON.parse(@story_segment.message)
     @paragraphs = @story_segment.safe_message["paragraphs"]
     @segment_num = @story_segment.safe_message["segment"]
     @choices = @story_segment.safe_message["choices"]
+
     # @textbits = StorySegment.where("id LIKE ?", params[:id])
     # raise
     @pagy_a, @paragraphs = pagy_array(@paragraphs, items: 1)
@@ -30,11 +37,19 @@ class StorySegmentsController < ApplicationController
     end
     last_hash = {
       role: "user",
-      content: params["story_segment"]["choice"],  # TODO: get the choice from the user and put it inside the quotes
+      content: params["story_segment"]["choice"],
     }
     big_bubba << last_hash
-    new_segment = OpenaiService.new(big_bubba).add_segment_call
-    segment_data = JSON.parse(new_segment)
+    segment_message = OpenaiService.new(big_bubba).add_segment_call
+    segment_params = {
+      order: @story_segment.order + 1,
+      message: segment_message,
+      role: 'assistant',
+      story: @story_segment.story
+    }
+    new_segment = StorySegment.new(segment_params)
+    new_segment.save!
+    redirect_to story_segment_path(new_segment)
     # @paragraph = segment_data["paragraphs"][0]       use this if you wanna check if there is anything inside of the data
   end
 
