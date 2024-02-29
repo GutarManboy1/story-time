@@ -1,9 +1,49 @@
-<div data-controller="keywords">
+<%# <div>
   <%= simple_form_for @story do |f| %>
-  <%= f.input :genre, collection: ["Adventure", "Horror", "Sci-Fi"], prompt: "Select a Genre" %>
-  <%= f.input :length, collection: ["Short", "Medium", "Long"], prompt: "Select Length" %>
-  <%= f.input :english_difficulty, collection: ["Beginner", "Intermediate", "Advanced"], prompt: "Select Difficulty" %>
-  <%= f.input :keywords, as: :string %>
-  <%= f.button :submit %>
-<% end %>
-</div>
+  <%# <%= f.input :genre, collection: ["Adventure", "Fairy Tale", "Fantasy", "Horror", "Love", "Mystery", "Sci-Fi"], prompt: "Select a Genre" %>
+  <%# <%= f.input :length, collection: ["Short", "Medium", "Long"], prompt: "Select Length" %> %>
+  <%# <%= f.input :english_difficulty, collection: ["Beginner", "Intermediate", "Advanced"], prompt: "Select Difficulty" %> %>
+  <%# <%= f.input :keywords, as: :string %> %>
+  <%# <%= f.button :submit %> %>
+<%# <% end %> %>
+<%# </div> %> %> %>
+
+
+<form action="/stories" method="post">
+  <!-- CSRF Token for security -->
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <!-- Genre dropdown -->
+  <label for="genre">Genre:</label>
+  <select name="genre" id="genre">
+    <option value="" disabled selected>Select a Genre</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Fairy Tale">Fairy Tale</option>
+    <option value="Fantasy">Fantasy</option>
+    <option value="Horror">Horror</option>
+    <option value="Love">Love</option>
+    <option value="Mystery">Mystery</option>
+    <option value="Sci-Fi">Sci-Fi</option>
+  </select>
+
+  <label for="length">Length:</label>
+  <select name="length" id="length">
+    <option value="" disabled selected>Select Length</option>
+    <option value="Short">Short</option>
+    <option value="Medium">Medium</option>
+    <option value="Long">Long</option>
+  </select>
+
+  <label for="difficulty">Difficulty:</label>
+  <select name="difficulty" id="difficulty">
+    <option value="" disabled selected>Select Difficulty</option>
+    <option value="Beginner">Beginner</option>
+    <option value="Intermediate">Intermediate</option>
+    <option value="Advanced">Advanced</option>
+  </select>
+
+  <label for="keywords">Keywords:</label>
+  <input type="text" name="themes" id="themes">
+
+  <input type="submit" value="Submit">
+</form>
