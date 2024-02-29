@@ -1,6 +1,7 @@
 class Story < ApplicationRecord
   belongs_to :user
   belongs_to :prompt_template
+  has_many :story_segments
 
   attr_accessor :genre, :length, :english_difficulty, :keywords
 
