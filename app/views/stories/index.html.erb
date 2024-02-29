@@ -8,14 +8,14 @@
       <div class="list-group">
         <% 3.times do %>
           <% @stories.each do |story|%>
-            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <div class= "border p-3">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"> <%= story.title %>  </h5>
                 <small>3 days ago</small>
               </div>
               <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
               <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
-            </a>
+            </div>
           <% end %>
         <% end %>
       </div>
@@ -26,14 +26,14 @@
       <div class="list-group">
         <% 3.times do %>
           <% @stories.each do |story|%>
-            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <div class= "border p-3">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"><%= story.title %></h5>
                 <small>3 days ago</small>
               </div>
               <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
-              <button type="button" class="btn btn-success">Flashcards</button>
-            </a>
+              <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+            </div>
           <% end %>
         <% end %>
       </div>
