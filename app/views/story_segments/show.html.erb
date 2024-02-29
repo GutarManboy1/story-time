@@ -1,0 +1,11 @@
+<div class="container pt-3">
+  <h1 style="color: black;"><%= @story_segment.story.title %>, page: <%= @story_segment.order %></h1>
+  <div class="container mt-4">
+    <% if @story_segment.role == "assistant" %>
+      <% @paragraphs.each do |paragraph| %>
+        <p><%= paragraph %></p>
+        <%= render "next_button" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

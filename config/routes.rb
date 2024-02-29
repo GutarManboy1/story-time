@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'stories', to: 'stories#index'
   resources :stories, only: [:new, :create, :show]
   resources :flashcards, except: [:create]
-  resources :story_segments, only: [] do
+  resources :story_segments, only: [:show] do
     resources :flashcards, only: [:create]
   end
 
