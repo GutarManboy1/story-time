@@ -4,7 +4,9 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @segments = StorySegment.where(story: @story)
-    @first_page = @segments[1]
+    @story_segment = @segments[1]
+    @segment_num = @story_segment.order
+    @paragraphs = story_segment.
   end
 
   def index
