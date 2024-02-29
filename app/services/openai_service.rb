@@ -26,10 +26,28 @@ class OpenaiService
     return response["choices"][0]["message"]["content"]
   end
 
+  def add_segment_call
+    p prompt.class
+    p prompt
+    response = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        response_format: {
+          type: "json_object"
+        },
+        messages: prompt,
+        temperature: 0.8,
+        stream: false,
+        max_tokens: 4000
+      }
+    )
+    return response["choices"][0]["message"]["content"]
+  end
+
 
   # and this method shows the structure of how you would input a "chat" as a prompt for the GPT api
   # "story settings is a hash consisting of level:string length:int genre:string and themes:string"
-  def testcall(story_settings)
+  def testcall
     params = {
       model: "gpt-3.5-turbo",
       messages: [
@@ -85,6 +103,30 @@ class OpenaiService
                     ]
                   }
                   SYSTEM_PROMPT
+        },
+        {
+          role: "assistant",
+          content: <<~ASSISTANT
+            {
+            segment: 1,
+            title: "Shadows of Tomorrow",
+            paragraphs: [
+              "In the desolate wasteland of a post-apocalyptic world, where the sun struggled to pierce through thick clouds, a lone figure named Jack traversed the barren landscape. The air was heavy with an eerie silence, broken only by the distant howls of mutant creatures.",
+              "As Jack trudged along, he stumbled upon a rusty, overturned vending machine half-buried in the ashy soil. Among the debris, he discovered a can of Mountain Dew, the last relic of the world that once was. Thirsty and desperate, he cracked it open, the fizz echoing in the desolation.",
+              "Suddenly, a lazy junkyard dog emerged from the shadows, drawn by the sound. Its fur was a patchwork of grays, and its tail wagged cautiously. Jack, feeling a strange connection, shared a sip of the soda with his newfound companion.",
+              "In the distance, a silhouette appeared – Mad-Dog McGee, a rugged man with a worn leather jacket and a gaze as sharp as the shards of the shattered world around them. He eyed Jack and the dog with a mix of curiosity and suspicion.",
+              "Mad-Dog McGee spoke in gruff tones, revealing a hint of a plan to reach a rumored safe haven. Jack, the dog at his side, faced a crucial decision."
+            ],
+            choices: [
+              "1. Trust Mad-Dog McGee and join forces for the perilous journey.",
+              "2. Proceed alone, relying on instinct and avoiding potential danger."
+            ]
+          }
+          ASSISTANT
+        },
+        {
+          role: 'user',
+          content: "1"
         }
       ],
       temperature: 0.7,

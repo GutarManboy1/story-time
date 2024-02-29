@@ -31,6 +31,20 @@ class StoriesController < ApplicationController
     @story.user = current_user
     @story.prompt_template = @template_object
     if @story.save!
+      system_params = {
+        order: 0,
+        message: prompt,
+        role: 'system',
+        story: @story
+      }
+      StorySegment.create!(system_params)
+      first_segment_params = {
+        order: 1,
+        message: first_segment,
+        role: 'system',
+        story: @story
+      }
+      StorySegment.create!(first_segment_params)
       redirect_to story_path(@story)
     else
       render :new, status: :unprocessable_entity
