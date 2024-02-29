@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'libraries/index'
   get 'flashcards/index'
   get 'stories/show'
   devise_for :users

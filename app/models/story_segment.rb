@@ -6,11 +6,23 @@ class StorySegment < ApplicationRecord
   #   set_content
   #   set_photo
   # end
+  default_scope { order(order: :asc)}
+  scope :from_ai, -> {where(role: :assistant)}
+  scope :from_user, -> {where(role: :user)}
   has_one_attached :photo
 
 
   belongs_to :story
   has_many :flashcards
+
+
+  def first_paragraph
+    begin
+      JSON.parse(self.message).fetch("paragraphs").first
+    rescue
+      nil
+    end
+  end
 
   def safe_message
       JSON.parse(message)
