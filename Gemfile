@@ -55,6 +55,7 @@ gem "cloudinary"
 gem "ruby-openai"
 gem "faker"
 gem "open-uri"
+gem 'pagy'
 
 group :development, :test do
   gem "dotenv-rails"
