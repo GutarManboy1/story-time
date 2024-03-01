@@ -1,0 +1,51 @@
+.new-story-form {
+  background-color: $gray;
+  border-radius: 15px;
+  padding: 20px;
+  width: 70%;
+  max-width: 500px;
+  padding: 20px 20px;
+  margin: 8px 0;
+  box-shadow: 10px 10px 0 #31464E, 5px 5px 0 #31464E, 2px 2px 0 #31464E;
+
+  form {
+    border-width: 12px;
+    border-top: 12px inset #53758243;
+    border-bottom: 12px outset #8ec1d443;
+    border-left: 12px inset #3f5a6443;
+    border-right: 12px inset #8ec1d443;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .drop-select {
+      height: 50px;
+      background-color: $light-gray;
+      font-size: 24px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .text-input {
+      height: 100px;
+      background-color: $light-gray;
+      font-size: 24px;
+      margin-bottom: 16px;
+      border-radius: 5px;
+    }
+
+    label {
+      color: $light-gray;
+      font-size: 20px;
+    }
+
+    div {
+
+      .make-story-button {
+        box-shadow: 5px 5px 10px black;
+        font-size: 24px;
+        font-weight: 200;
+        }
+    }
+  }
+}
