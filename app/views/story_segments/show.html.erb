@@ -1,10 +1,10 @@
-<body>
+<body class="story-segment-specific">
   <div class="container pt-3">
     <div class="container mt-1 mb-4">
       <div class="container">
         <% if @story_segment.photo.attached? %>
           <div class="d-flex justify-content-center mt-3 mb-4 sticky-top" data-controller="next-paragraph">
-            <button id="toggleButton" class="btn btn-success "><%= cl_image_tag @story_segment.photo.key, width: 600, height: 400, crop: :fill %></button>
+            <button id="toggleButton" class="btn"><%= cl_image_tag @story_segment.photo.key, width: 800, height: 400, crop: :fill %></button>
           </div>
         <% else %>
           <p>No image attached.</p>
@@ -12,7 +12,7 @@
         <% if @story_segment.role == "assistant" %>
           <% @paragraphs.each_with_index do |paragraph, index| %>
             <div class="toggle-div" style="display: none;">
-              <p class="d-flex justify-content-center"><%= paragraph %></p>
+              <p class="d-flex justify-content-center" style="font-size: x-large;"><%= paragraph %></p>
               <div class="row">
                 <% if index == @paragraphs.size - 1 && @choices.present? %>
                   <% @choices.each_with_index do |choice, index| %>
@@ -20,7 +20,7 @@
                       <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
                         <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
                         <%= f.input :choice, as: :hidden, input_html: { value: "#{index + 1}"} %>
-                        <%= f.submit choice, class: 'btn btn-primary' %>
+                        <%= f.submit choice, class: 'btn btn-primary', style: "font-size: x-large;" %>
                       <% end %>
                     </div>
                   <% end %>

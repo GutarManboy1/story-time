@@ -1,3 +1,10 @@
+
+.story-segment-specific {
+  background-image: image-url('segment.webp');
+  background-size: cover; // Cover the entire page
+  background-repeat: no-repeat;
+}
+
 .centered {
   display: flex;
   justify-content: center;
