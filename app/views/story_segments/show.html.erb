@@ -25,6 +25,11 @@
         <% end %>
       <% end %>
     <% end %>
-  <%== pagy_nav(@pagy_a) %>
-</div>
+    <% if @pagy_a.prev %>
+      <%= link_to 'Previous', request.params.merge(page: @pagy_a.prev), class: 'btn btn-primary' %>
+    <% end %>
+    <% if @pagy_a.next %>
+      <%= link_to 'Next', request.params.merge(page: @pagy_a.next), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 </div>
