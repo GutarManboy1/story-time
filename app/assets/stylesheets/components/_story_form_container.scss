@@ -1,0 +1,16 @@
+.story-form-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    background: linear-gradient(to right,
+    #3f5a6400 0%,
+    #3f5a64cd 20%,
+    #3F5A64cd 80%,
+    #3f5a6400 100%
+  );
+    padding: 10px 60px;
+  }
+}
