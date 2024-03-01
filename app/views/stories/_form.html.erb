@@ -4,7 +4,7 @@
 
   <!-- Genre dropdown -->
   <label for="genre">Genre:</label>
-  <select name="genre" id="genre">
+  <select name="genre" id="genre" class="drop-select">
     <option value="" disabled selected>Select a Genre</option>
     <option value="Adventure">Adventure</option>
     <option value="Fairy Tale">Fairy Tale</option>
@@ -16,7 +16,7 @@
   </select>
 
   <label for="length">Length:</label>
-  <select name="length" id="length">
+  <select name="length" id="length" class="drop-select">
     <option value="" disabled selected>Select Length</option>
     <option value="Short">Short</option>
     <option value="Medium">Medium</option>
@@ -24,15 +24,16 @@
   </select>
 
   <label for="difficulty">Difficulty:</label>
-  <select name="difficulty" id="difficulty">
+  <select name="difficulty" id="difficulty" class="drop-select">
     <option value="" disabled selected>Select Difficulty</option>
     <option value="Beginner">Beginner</option>
     <option value="Intermediate">Intermediate</option>
     <option value="Advanced">Advanced</option>
   </select>
 
-  <label for="keywords">Keywords:</label>
-  <input type="text" name="themes" id="themes">
-
-  <input type="submit" value="Submit">
+  <label for="themes">Story Themes: (separated by commas)</label>
+  <textarea name="themes" id="themes" class="text-input" placeholder="Example: a purple giraffe, a man named Rolo, the best coffee in the world"></textarea>
+  <div class="d-flex justify-content-center">
+    <input type="submit" value="Let's Read" class="btn btn-success make-story-button">
+  </div>
 </form>
