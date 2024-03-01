@@ -3,30 +3,45 @@
   background-size: cover;
   background-position: center;
   padding: 185px 0;
+
 }
 
-.banner h1 {
+.banner h1 p {
   margin: 0;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   font-size: 60px;
   font-weight: bold;
 }
 
-h1, p{
+h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 60px;
+  background: linear-gradient(to right,
+      #3f5a6400 0%,
+      #3f5a64cd 20%,
+      #3F5A64cd 80%,
+      #3f5a6400 100%,
+    )
 }
+
 
 .banner p {
   font-size: 20px;
   color: white;
   opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.banner .position-top {
+  position: absolute;
+  top: 80px;
+  left: 300px;
 }
 
 //footer
@@ -35,14 +50,16 @@ h1, p{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height:60px;
+  height: 60px;
   padding: 0px 10px;
-  color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
 }
+
 .footer-links {
   display: flex;
   align-items: center;
 }
+
 .footer-links a {
   color: #ECE9EA;
   opacity: 0.15;
@@ -50,6 +67,7 @@ h1, p{
   font-size: 24px;
   padding: 0px 10px;
 }
+
 .footer-links a:hover {
   opacity: 1;
 }
