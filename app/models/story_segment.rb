@@ -42,7 +42,7 @@ class StorySegment < ApplicationRecord
       {
         model: "dall-e-3",
         prompt: "#{prompt}",
-        size: "1024x1024"
+        size: "1024x1792"
       })
 
     url = response["data"][0]["url"]
