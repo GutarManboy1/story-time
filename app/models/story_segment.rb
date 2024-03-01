@@ -22,6 +22,14 @@ class StorySegment < ApplicationRecord
     end
   end
 
+  def all_paragraphs
+    begin
+      JSON.parse(self.message).fetch("paragraphs")
+    rescue
+      nil
+    end
+  end
+
   def safe_message
       JSON.parse(message)
     rescue
@@ -32,7 +40,8 @@ class StorySegment < ApplicationRecord
     client = OpenAI::Client.new
     response = client.images.generate(parameters:
       {
-        prompt: "#{prompt} in the style of fantasy art",
+        model: "dall-e-3",
+        prompt: "#{prompt}",
         size: "1024x1024"
       })
 

@@ -47,7 +47,8 @@ class StoriesController < ApplicationController
         story: @story
       }
       new_segment = StorySegment.new(first_segment_params)
-      img_prompt = new_segment.first_paragraph
+      text = new_segment.all_paragraphs.join(" ")
+      img_prompt = OpenaiService.new(text).generate_art_prompt
       new_segment.set_photo(img_prompt)
       new_segment.save!
       redirect_to story_path(@story)

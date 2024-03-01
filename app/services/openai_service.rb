@@ -27,8 +27,6 @@ class OpenaiService
   end
 
   def add_segment_call
-    p prompt.class
-    p prompt
     response = client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
@@ -39,6 +37,20 @@ class OpenaiService
         temperature: 0.8,
         stream: false,
         max_tokens: 4096
+      }
+    )
+    return response["choices"][0]["message"]["content"]
+  end
+
+  def generate_art_prompt
+    response = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "system", content: "You are an Dall-E-3 art prompt generator. Your job is to read the story given to you by the user, and create a Dall-E-3 prompt that will generate an image that captures what is happening in the story. The image should be detailed, but more illustrative or painterly rather that photorealistic. Try to summarize what is happening in the scene, and prioritize creating images that depict interactions between characters and or objects.  Pay close attention to adjectives used. Also try to grasp the mood and setting of the story and apply it to the background in your prompt."},
+                   { role: "user", content: prompt }],
+        temperature: 0.7,
+        stream: false,
+        max_tokens: 4000
       }
     )
     return response["choices"][0]["message"]["content"]
