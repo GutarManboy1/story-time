@@ -21,7 +21,7 @@ class StorySegmentsController < ApplicationController
 
     # @textbits = StorySegment.where("id LIKE ?", params[:id])
     # raise
-    @pagy_a, @paragraphs = pagy_array(@paragraphs, items: 1)
+    @paragraphs = @paragraphs
   end
 
   def create
