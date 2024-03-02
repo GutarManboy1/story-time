@@ -10,3 +10,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.word-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 2px; /* Adjust spacing around words as needed */
+  font-size: inherit; /* Make the button text match surrounding text */
+  cursor: pointer;
+}
+
+.word-btn:hover {
+  text-decoration: underline; /* Optional: Highlight text on hover */
+}
