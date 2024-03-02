@@ -538,13 +538,82 @@ all_users = User.all
     card.answer = hash_string
     card.study_status = rand(0..2)
     card.story_segment_id = segment.id
-    card.user_id = all_users.sample.id
+    card.user_id = segment.story.user.id
     card.save!
     puts "Made flashcard for #{word}"
   rescue OpenURI::HTTPError
     puts "Failed to make card for #{word}!"
     next
   end
+end
+
+
+gpt_flashcard_info = [
+  {
+    excerpt: "the untamed wilderness",
+    answer: "\"The untamed wilderness\" refers to an area of land that is wild, natural, and has not been controlled or changed by people. It's a place where nature is in its original, wild state without any human influence or organization. Imagine a forest, jungle, or a vast open area with plants and animals living freely without human interference. It's like nature in its pure and untouched form.",
+    story_segment_id: all_segments[0].id,
+    user_id: all_segments[0].story.user.id
+  },
+  {
+    excerpt: "their path was not without obstacles",
+    answer: "\"Their path was not without obstacles\" means that the journey or route they were taking had challenges or difficulties. The word \"path\" here represents the way or course they were traveling, and \"obstacles\" are things that make the journey harder, like problems or barriers. So, the sentence suggests that they faced some challenges or difficulties along the way. It's a way of saying their journey wasn't entirely easy – they encountered some problems or hurdles as they moved forward.",
+    story_segment_id: all_segments[1].id,
+    user_id: all_segments[1].story.user.id
+  },
+  {
+    excerpt: "they approached the heart of the marsh",
+    answer: "\"They approached the heart of the marsh\" means that they are getting closer to the central or deepest part of a marsh. In this context, a marsh refers to a wetland area with soft, wet ground, usually characterized by tall grasses, reeds, and often standing water. The \"heart\" of the marsh is the central area, so the sentence indicates that they are nearing the core or center of this wetland. It sets the scene for their location in the story, suggesting they are moving deeper into the marshland.",
+    story_segment_id: all_segments[2].id,
+    user_id: all_segments[2].story.user.id
+  },
+  {
+    excerpt: "Gaga chose to share a quiet moment with him",
+    answer: "\"Gaga chose to share a quiet moment with him\" means that Gaga decided to spend a peaceful and calm time with another person. The phrase \"quiet moment\" implies a time without much noise or distraction, where they can be together in a calm and relaxed setting. So, in this context, Gaga made a choice to have a tranquil and possibly meaningful time with the other person, away from the hustle and bustle of a busy environment.",
+    story_segment_id: all_segments[3].id,
+    user_id: all_segments[3].story.user.id
+  },
+  {
+    excerpt: "The once-solemn ogre",
+    answer: "\"The once-solemn ogre\" refers to an ogre who used to be solemn, or serious and grave in demeanor. The word \"once\" indicates that this quality has changed over time. So, it suggests that the ogre was previously known for being serious or somber, but something has happened or changed, altering the ogre's demeanor. It invites the reader to consider how the ogre might be different now compared to how they were before.",
+    story_segment_id: all_segments[4].id,
+    user_id: all_segments[4].story.user.id
+  },
+  {
+    excerpt: "bridged the gap",
+    answer: "\"Bridged the gap\" is a phrase that means to connect or reduce the differences between two things. It is often used metaphorically to describe efforts to bring together people, ideas, or situations that were previously separated or different. So, if someone or something \"bridged the gap,\" it means they worked to create a connection, understanding, or continuity where there was once a divide or difference.",
+    story_segment_id: all_segments[5].id,
+    user_id: all_segments[5].story.user.id
+  },
+  {
+    excerpt: "where the sun struggled to pierce through thick clouds",
+    answer: "This phrase, \"where the sun struggled to pierce through thick clouds,\" describes a situation where sunlight had difficulty breaking through dense or heavy cloud cover in the sky. It suggests that the clouds were so thick that the sun had a hard time shining through them. This often creates a dim or subdued lighting effect, and it might imply a gloomy or overcast atmosphere.",
+    story_segment_id: all_segments[6].id,
+    user_id: all_segments[6].story.user.id
+  },
+  {
+    excerpt: "stumbled upon",
+    answer: "\"Stumbled upon\" is a phrase that means to unexpectedly find or discover something, often by chance or accident. It suggests that the discovery was not intentional or planned; instead, it happened unexpectedly while the person was perhaps exploring, walking, or doing something unrelated. So, if someone \"stumbled upon\" something, it means they came across it unexpectedly or by happenstance.",
+    story_segment_id: all_segments[7].id,
+    user_id: all_segments[7].story.user.id
+  },
+  {
+    excerpt: "a glint of defiance in his eyes",
+    answer: "\"A glint of defiance in his eyes\" suggests that there is a small, noticeable sparkle or gleam in the person's eyes that reflects a sense of defiance. Defiance means resistance or disobedience, going against authority or expectations. So, in this context, the phrase indicates that the person's eyes are showing a spark of resistance or determination to stand against something, perhaps a challenging situation or a rule they disagree with. It conveys a subtle but visible expression of their strong and independent mindset.",
+    story_segment_id: all_segments[8].id,
+    user_id: all_segments[8].story.user.id
+  }
+]
+
+gpt_flashcard_info.each do |info|
+  card = Flashcard.new
+  card.excerpt = info[:excerpt]
+  card.card_type = 2
+  card.answer = info[:answer]
+  card.study_status = rand(0..2)
+  card.story_segment_id = info[:story_segment_id]
+  card.user_id = info[:user_id]
+  card.save!
 end
 
 puts "      You planted some pretty flowers!"
