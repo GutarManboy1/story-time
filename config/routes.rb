@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   resources :story_segments, only: [:show] do
     resources :flashcards, only: [:create]
   end
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
