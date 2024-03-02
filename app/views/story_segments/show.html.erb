@@ -9,38 +9,46 @@
         <% else %>
           <p>No image attached.</p>
         <% end %>
-        <% if @story_segment.role == "assistant" %>
-          <% @paragraphs.each_with_index do |paragraph, index| %>
-            <div class="toggle-div" style="display: none;">
-              <p class="d-flex justify-content-center" style="font-size: x-large;"><%= paragraph %></p>
-              <div class="row">
-                <% if index == @paragraphs.size - 1 && @choices.present? %>
-                  <% @choices.each_with_index do |choice, index| %>
-                    <div class="d-flex justify-content-center">
-                      <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
-                        <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
-                        <%= f.input :choice, as: :hidden, input_html: { value: "#{index + 1}"} %>
-                        <%= f.submit choice, class: 'btn btn-primary', style: "font-size: x-large;" %>
-                      <% end %>
-                    </div>
+        <div data-controller="word-lookup">
+          <% if @story_segment.role == "assistant" %>
+            <% @paragraphs.each_with_index do |paragraph, p_index| %>
+              <div class="toggle-div" style="display: none;" >
+                <p class="d-flex justify-content-center" style="font-size: x-large;">
+                  <% paragraph.split(' ').each_with_index do |word, w_index| %>
+                    <button data-action="word-lookup#lookupWord" data-word="<%= word %>" class="word-btn">
+                      <%= word %>
+                    </button>
                   <% end %>
-                </div>
-              <% elsif  index == @paragraphs.size - 1 && !@choices.present? %>
-                <div class="container d-flex justify-content-center">
-                  <h3>You have reached the end of the story.</h3>
-                </div>
-                <div class="d-flex justify-content-center">
-                  <div class="pr-3">
-                    <%= link_to 'Back to Menu', root_path, class: 'btn btn-primary'%>
+                </p>
+                <div class="row">
+                  <% if p_index == @paragraphs.size - 1 && @choices.present? %>
+                    <% @choices.each_with_index do |choice, index| %>
+                      <div class="d-flex justify-content-center">
+                        <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+                          <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
+                          <%= f.input :choice, as: :hidden, input_html: { value: "#{index + 1}"} %>
+                          <%= f.submit choice, class: 'btn btn-primary', style: "font-size: x-large;" %>
+                        <% end %>
+                      </div>
+                    <% end %>
                   </div>
-                  <div class="pl-3">
-                    <%= link_to 'Back to Book Cover', story_path(@story_segment.story), class: 'btn btn-primary' %>
+                <% elsif  p_index == @paragraphs.size - 1 && !@choices.present? %>
+                  <div class="container d-flex justify-content-center">
+                    <h3>You have reached the end of the story.</h3>
                   </div>
-                </div>
-              <% end %>
-            </div>
+                  <div class="d-flex justify-content-center">
+                    <div class="pr-3">
+                      <%= link_to 'Back to Menu', root_path, class: 'btn btn-primary'%>
+                    </div>
+                    <div class="pl-3">
+                      <%= link_to 'Back to Book Cover', story_path(@story_segment.story), class: 'btn btn-primary' %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
