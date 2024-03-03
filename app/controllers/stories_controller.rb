@@ -25,36 +25,36 @@ class StoriesController < ApplicationController
     themes: params[:themes]
     }
     prompt = make_story_prompt(template_string, settings)
-    first_segment = OpenaiService.new(prompt).call
-    segment_data = JSON.parse(first_segment)
-    @story = Story.new()
-    @story.title = segment_data["title"]
-    @story.system_prompt = prompt
-    @story.user = current_user
-    @story.prompt_template = @template_object
-    if @story.save!
-      system_params = {
-        order: 0,
-        message: prompt,
-        role: 'system',
-        story: @story
-      }
-      StorySegment.create!(system_params)
-      first_segment_params = {
-        order: 1,
-        message: first_segment,
-        role: 'assistant',
-        story: @story
-      }
-      new_segment = StorySegment.new(first_segment_params)
-      text = new_segment.all_paragraphs.join(" ")
-      img_prompt = OpenaiService.new(text).generate_art_prompt
-      new_segment.set_photo(img_prompt)
-      new_segment.save!
-      redirect_to story_path(@story)
-    else
-      render :new, status: :unprocessable_entity
-    end
+    first_segment = CreateNewStoryJob.perform_later(prompt, @template_object.id)
+    # segment_data = JSON.parse(first_segment)
+    # @story = Story.new()
+    # @story.title = segment_data["title"]
+    # @story.system_prompt = prompt
+    # @story.user = current_user
+    # @story.prompt_template = @template_object
+    # if @story.save!
+    #   system_params = {
+    #     order: 0,
+    #     message: prompt,
+    #     role: 'system',
+    #     story: @story
+    #   }
+    #   StorySegment.create!(system_params)
+    #   first_segment_params = {
+    #     order: 1,
+    #     message: first_segment,
+    #     role: 'assistant',
+    #     story: @story
+    #   }
+    #   new_segment = StorySegment.new(first_segment_params)
+    #   text = new_segment.all_paragraphs.join(" ")
+    #   img_prompt = OpenaiService.new(text).generate_art_prompt
+    #   new_segment.set_photo(img_prompt)
+    #   new_segment.save!
+    #   redirect_to story_path(@story)
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
   end
 
   private
