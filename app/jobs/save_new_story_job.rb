@@ -5,12 +5,10 @@ class SaveNewStoryJob < ApplicationJob
     story = details[:story]
     story.title = details[:title]
     story.system_prompt = details[:prompt]
-    story.user = current_user
-    story.prompt_template = details[:template]
     if story.save!
-      puts "New story successfully saved."
+      puts "MMMMMMMMMMMMMMMMMMMMMM New story successfully saved."
     else
-      puts "Failed to save new story."
+      puts "MMMMMMMMMMMMMMMMMMMMMMM Failed to save new story."
     end
   end
 end

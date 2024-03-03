@@ -6,11 +6,10 @@ class SaveNewSegmentJob < ApplicationJob
       segment.order = params[:order]
       segment.message = params[:message]
       segment.role = params[:role]
-      segment.story = params[:story]
       if segment.save!
-        puts "Segment #{order} successfully saved."
+        puts "Segment #{segment.order} successfully saved."
       else
-        puts "Failed to save segment #{order}."
+        puts "Failed to save segment #{segment.order}."
       end
   end
 end

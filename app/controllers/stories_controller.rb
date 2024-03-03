@@ -25,7 +25,7 @@ class StoriesController < ApplicationController
     themes: params[:themes]
     }
     prompt = make_story_prompt(template_string, settings)
-    first_segment = CreateNewStoryJob.perform_later(prompt, template_object.id)
+    first_segment = CreateNewStoryJob.perform_later(prompt, template_object.id, current_user.id)
 
     # segment_data = JSON.parse(first_segment)
     # @story = Story.new()

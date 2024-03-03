@@ -3,26 +3,34 @@ require 'json'
 class CreateNewStoryJob < ApplicationJob
   queue_as :default
 
-  def perform(prompt, template)
+  def perform(prompt, template, user_id)
     template_instance = PromptTemplate.find(template)
+    user = User.find(user_id)
     puts "Prompt template retrieved"
-    first_response = OpenaiService.new(prompt).call  # the reason why the api call is here and not in create_new_segment is because the new story needs a title.
+
+    first_response = OpenaiService.new(prompt).call
     puts "Recieved first story paragraphs from chatgpt"
+
     segment_data = JSON.parse(first_response)
     puts "Parsed the data from chatgpt"
-    story = Story.new
-    prompt_segment = StorySegment.new
-    first_segment = StorySegment.new
+
+    story = Story.create!({user: user, prompt_template: template_instance})
+    prompt_segment = StorySegment.create!({story: story})
+    first_segment = StorySegment.create!({story: story})
     puts "created a new story, and two new segments (blank)"
+
     SaveNewStoryJob.perform_later({title: segment_data["title"], prompt: prompt, template: template_instance, story: story})
-    puts "Sent off the job to save the new story (completion unknown)"
-    SaveNewSegmentJob.perform_later({order: 0, message: prompt, role: "system", story: story, segment: prompt_segment})
-    puts "Sent off the job to save the system segment (completion unknown)"
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMM Sent off the job to save the new story (completion unknown)"
+
+    SaveNewSegmentJob.perform_later({order: 0, message: prompt, role: "system", segment: prompt_segment})
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM Sent off the job to save the system segment (completion unknown)"
     puts "Next, will send off job to attach a photo to the second blank segment"
-    picture_segment = CreateNewArtJob.perform_now(segment_data["paragraphs"].join(" "), segment: first_segment)
-    puts "Recieved segment back with photo attached (hopefully)"
-    SaveNewSegmentJob.perform_later({order: 1, message: first_response, role: "assistant", story: story, segment: picture_segment})
-    puts "Sent off the job to save the first story segment (completion unknown)"
+
+    picture_segment = CreateNewArtJob.perform_now({paragraphs: segment_data["paragraphs"].join(" "), segment: first_segment})
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM Recieved segment back with photo attached (hopefully)"
+
+    SaveNewSegmentJob.perform_later({order: 1, message: first_response, role: "assistant", segment: picture_segment})
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM Sent off the job to save the first story segment (completion unknown)"
   end
 end
 
