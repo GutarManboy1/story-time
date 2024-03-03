@@ -26,10 +26,10 @@ class CreateNewStoryJob < ApplicationJob
   end
 end
 
-------
-new_segment = StorySegment.new(first_segment_params)
-text = new_segment.all_paragraphs.join(" ")
-img_prompt = OpenaiService.new(text).generate_art_prompt
-new_segment.set_photo(img_prompt)
-new_segment.save!
-redirect_to story_path(@story)
+# ------
+# new_segment = StorySegment.new(first_segment_params)
+# text = new_segment.all_paragraphs.join(" ")
+# img_prompt = OpenaiService.new(text).generate_art_prompt
+# new_segment.set_photo(img_prompt)
+# new_segment.save!
+# redirect_to story_path(@story)

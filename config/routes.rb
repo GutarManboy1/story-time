@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
   get 'stories', to: 'stories#index'
+  get 'loading_screens', to: 'loading_screens#index'
   resources :stories, only: [:new, :create, :show] do
     resources :story_segments, only: [:create]
   end

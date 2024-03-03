@@ -16,8 +16,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @template_object = PromptTemplate.last
-    template_string = @template_object.prompt
+    template_object = PromptTemplate.last
+    template_string = template_object.prompt
     settings = {
     genre: params[:genre],
     length: params[:length],
@@ -25,7 +25,8 @@ class StoriesController < ApplicationController
     themes: params[:themes]
     }
     prompt = make_story_prompt(template_string, settings)
-    first_segment = CreateNewStoryJob.perform_later(prompt, @template_object.id)
+    first_segment = CreateNewStoryJob.perform_later(prompt, template_object.id)
+
     # segment_data = JSON.parse(first_segment)
     # @story = Story.new()
     # @story.title = segment_data["title"]
@@ -55,6 +56,7 @@ class StoriesController < ApplicationController
     # else
     #   render :new, status: :unprocessable_entity
     # end
+    redirect_to loading_screens_path
   end
 
   private
