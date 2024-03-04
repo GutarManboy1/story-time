@@ -7,14 +7,17 @@ class StorySegmentsController < ApplicationController
 
   def show
     @story_segment = StorySegment.find(params[:id])
-
     # @message_hash = JSON.parse(@story_segment.message)
     # @paragraphs = @message_hash["paragraphs"]
     # @segment_num = @message_hash["segment"]
     # @choices = @message_hash["choices"]
+    # @has_next_segment? = @story_segment.story.story_segments.where(order: (@story_segment.order + 1)).any?
 
+    @next_segment = @story_segment.story.story_segments.find_by(order: (@story_segment.order + 2))
+    # @story_segment.next_segment is ideal
     # @pagy, @paragraphs = pagy(@parsed_segment["paragraphs"])
     # @parsed_segment = JSON.parse(@story_segment.message)
+    @is_finished = !@story_segment.story.story_segments.last.message["choices"]
     @paragraphs = @story_segment.safe_message["paragraphs"]
     @segment_num = @story_segment.safe_message["segment"]
     @choices = @story_segment.safe_message["choices"]
@@ -31,7 +34,7 @@ class StorySegmentsController < ApplicationController
     segments.each do |segment|
       current_hash = {
         role: segment.role,
-        content: segment.message,
+        content: segment.message
       }
       big_bubba << current_hash
     end
