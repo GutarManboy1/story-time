@@ -1,14 +1,26 @@
-require 'json'
+require "json"
 
 class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
+    @completed_stories = Story.all.reject do |story|
+      story.story_segments.last.message["choices"]
+    end
+    @unfinished_stories = Story.all.select do |story|
+      story.story_segments.last.message["choices"]
+    end
     @segments = StorySegment.where(story: @story)
     @story_segment = @segments.last
   end
 
   def index
     @stories = Story.all
+    @completed_stories = Story.all.reject do |story|
+      story.story_segments.last.message["choices"]
+    end
+    @unfinished_stories = Story.all.select do |story|
+      story.story_segments.last.message["choices"]
+    end
   end
 
   def new
@@ -19,10 +31,10 @@ class StoriesController < ApplicationController
     @template_object = PromptTemplate.last
     template_string = @template_object.prompt
     settings = {
-    genre: params[:genre],
-    length: params[:length],
-    difficulty: params[:difficulty],
-    themes: params[:themes]
+      genre: params[:genre],
+      length: params[:length],
+      difficulty: params[:difficulty],
+      themes: params[:themes]
     }
     prompt = make_story_prompt(template_string, settings)
     first_segment = OpenaiService.new(prompt).call
@@ -36,15 +48,15 @@ class StoriesController < ApplicationController
       system_params = {
         order: 0,
         message: prompt,
-        role: 'system',
-        story: @story
+        role: "system",
+        story: @story,
       }
       StorySegment.create!(system_params)
       first_segment_params = {
         order: 1,
         message: first_segment,
-        role: 'assistant',
-        story: @story
+        role: "assistant",
+        story: @story,
       }
       new_segment = StorySegment.new(first_segment_params)
       text = new_segment.all_paragraphs.join(" ")
@@ -60,27 +72,26 @@ class StoriesController < ApplicationController
   private
 
   def make_story_prompt(template, settings) # genre, length, difficulty, themes
-
     difficulty = case settings[:difficulty]
-                 when 'Beginner'
-                   'B1'
-                 when 'Intermediate'
-                   'B2'
-                 when 'Advanced'
-                   'C1'
-                 else
-                   'B2' # the default behavior in case something goes wierd
-                 end
+      when "Beginner"
+        "B1"
+      when "Intermediate"
+        "B2"
+      when "Advanced"
+        "C1"
+      else
+        "B2" # the default behavior in case something goes wierd
+      end
     length = case settings[:length]
-             when 'short'
-               3
-             when 'medium'
-               4
-             when 'long'
-               5
-             else
-               4 # the default behavior in case something goes wierd
-             end
+      when "short"
+        3
+      when "medium"
+        4
+      when "long"
+        5
+      else
+        4 # the default behavior in case something goes wierd
+      end
     length_plus = length + 1
     length_plus_plus = length + 2
     length_minus = length - 1
@@ -94,7 +105,7 @@ class StoriesController < ApplicationController
       length_plus: length_plus,
       length_plus_plus: length_plus_plus,
       length_minus: length_minus,
-      length_minus_minus: length_minus_minus
+      length_minus_minus: length_minus_minus,
     }
 
     completed_template = template % template_variables

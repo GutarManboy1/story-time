@@ -6,17 +6,15 @@
       <!--ContinueReadingStoriesList-->
       <button type="button" class="btn btn-primary" data-bs-toggle="button">Continue Reading</button>
       <div class="list-group">
-        <% 3.times do %>
-          <% @stories.each do |story|%>
-            <div class= "border p-3">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"> <%= story.title %> </h5>
-                <small>3 days ago</small>
-              </div>
-              <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph %></p>
-              <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+        <% @unfinished_stories.each do |story|%>
+          <div class= "border p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"> <%= link_to story.title, story_path(story) %> </h5>
+              <small>3 days ago</small>
             </div>
-          <% end %>
+            <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph %></p>
+            <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -24,17 +22,15 @@
       <!--FinishedStoriesList-->
       <button type="button" class="btn btn-primary" data-bs-toggle="button">Completed Stories</button>
       <div class="list-group">
-        <% 3.times do %>
-          <% @stories.each do |story|%>
-            <div class= "border p-3">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><%= story.title %></h5>
-                <small>3 days ago</small>
-              </div>
-              <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
-              <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+        <% @completed_stories.each do |story|%>
+          <div class= "border p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"> <%= link_to story.title, story_path(story) %> </h5>
+              <small>3 days ago</small>
             </div>
-          <% end %>
+            <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
+            <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+          </div>
         <% end %>
       </div>
     </div>
