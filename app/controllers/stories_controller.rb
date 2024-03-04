@@ -4,14 +4,6 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
 
-    @completed_stories = Story.all.reject do |story|
-      story.story_segments.last.message["choices"]
-    end
-
-    @unfinished_stories = Story.all.select do |story|
-      story.story_segments.last.message["choices"]
-    end
-    
     @segments = StorySegment.where(story: @story).to_a.sort { |seg| seg.order }
 
     @story_segment = @segments.last
