@@ -1,0 +1,11 @@
+<%= form_for @flashcard do |f| %>
+
+  <div>
+    <%= f.label :answer %>
+    <%= f.text_field :answer %>
+    <%= f.label :date_created %>
+    <%= f.date_field :date_created, value: Date.today %>
+  </div>
+
+  <%= f.submit "Create Flashcard" %>
+<% end %>

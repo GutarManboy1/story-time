@@ -1,36 +1,26 @@
-<h1 class="text-center">Flashcards</h1>
-<button type="button" class="btn btn-primary btn-lg" id="toggleButton">See My Cards</button>
-
-<div class="container text-center">
-  <div class="row">
-    <div class="cards-container col">
-      <% @flashcards.each do |flashcard| %>
-      <div class="col-sm-6 mb-3 mb-sm-0">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"> title</h5>
-          <p class="card-text">story blurb</p>
-          <a href="#" class="btn btn-primary">See Cards</a>
-      </div>
+<h1 class="text-center">Flashcards Directory</h1>
+<!--Search bar with title and date-->
+<div class="form">
+  <%= form_tag flashcards_path, method: :get do %>
+    <div>
+      <%= text_field_tag :search_query, @search_query, placeholder: 'Search by title or date' %>
+    </div>
+    <div>
+      <%= submit_tag 'Search' %>
     </div>
   </div>
-
-      <% end %>
+<% end %>
+<!--flashcards-->
+<div class="container">
+   <%# @flashcards.each do |flashcard| %>
+  <div class="card">
+    <div class="card-front">
+      <h5> <%#= flashcard.story_segment.story.title %> </h5>
     </div>
-
-    <div class="cards-container col">
-      <% @flashcards.each do |flashcard| %>
-      <div class="col-sm-6 mb-3 mb-sm-0">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Title</h5>
-          <p class="card-text">blurb</p>
-          <a href="#" class="btn btn-primary">See Cards</a>
-      </div>
+    <div class="card-back">
+      <h5>deez nutz</h5>
+      <%= link_to 'Library', libraries_index_path, class: "btn btn-success" %>
     </div>
   </div>
-
-      <% end %>
-    </div>
-  </div>
+<% #end %>
 </div>
