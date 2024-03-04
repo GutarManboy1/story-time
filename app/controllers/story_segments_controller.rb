@@ -36,32 +36,6 @@ class StorySegmentsController < ApplicationController
     else
       render :show, status: :unprocessable_entity
     end
-    # big_bubba = []
-    # segments = StorySegment.where(story_id: @story_segment.story_id)
-    # segments.each do |segment|
-    #   current_hash = {
-    #     role: segment.role,
-    #     content: segment.message,
-    #   }
-    #   big_bubba << current_hash
-    # end
-    # last_hash = {
-    #   role: "user",
-    #   content: params["story_segment"]["choice"],
-    # }
-    # big_bubba << last_hash
-    # segment_message = OpenaiService.new(big_bubba).add_segment_call
-    # segment_params = {
-    #   order: @story_segment.order + 1,
-    #   message: segment_message,
-    #   role: 'assistant',
-    #   story: @story_segment.story
-    # }
-    # new_segment = StorySegment.new(segment_params)
-    # img_prompt = new_segment.first_paragraph
-    # new_segment.set_photo(img_prompt)
-    # new_segment.save!
-    redirect_to story_segment_path(new_segment)
   end
 
   private
