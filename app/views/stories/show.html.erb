@@ -2,9 +2,21 @@
   <div class="book-div">
     <%= image_tag "old_book.png", alt: "an old story book" %>
     <h1><%= @story.title %></h1>
-    <div class="story-links">
-      <%= link_to 'Begin Reading', story_segment_path(@story_segment), class: ['btn', 'btn-success', 'story-link'] %>
-      <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
-    </div>
+    <% if @story.story_segments.count == 2 %>
+      <div class="story-links">
+        <%= link_to 'Begin Reading', story_segment_path(@story_segment), class: ['btn', 'btn-success', 'story-link'] %>
+        <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
+      </div>
+    <% elsif @unfinished_stories.include?(@story) %>
+      <div class="story-links">
+        <%= link_to 'Continue Reading', story_segment_path(@story_segment), class: ['btn', 'btn-success', 'story-link'] %>
+        <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
+      </div>
+    <% else %>
+      <div class="story-links">
+        <%= link_to 'Read again', story_segment_path(@story.story_segments.find_by(order: 1)), class: ['btn', 'btn-success', 'story-link'] %>
+        <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
+      </div>
+    <% end %>
   </div>
 </div>
