@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get 'stories', to: 'stories#index'
   get 'loading_screens', to: 'loading_screens#index'
+  get 'test', to: 'loading_screens#test'
   resources :stories, only: [:new, :create, :show] do
     resources :story_segments, only: [:create]
   end
