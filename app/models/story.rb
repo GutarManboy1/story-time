@@ -5,6 +5,6 @@ class Story < ApplicationRecord
 
   attr_accessor :genre, :length, :english_difficulty, :keywords
 
-  validates :title, presence: true
-  validates :system_prompt, presence: true
+  # validates :title, presence: true
+  # validates :system_prompt, presence: true
 end

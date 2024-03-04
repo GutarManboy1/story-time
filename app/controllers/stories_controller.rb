@@ -3,13 +3,9 @@ require "json"
 class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
-    @completed_stories = Story.all.reject do |story|
-      story.story_segments.last.message["choices"]
-    end
-    @unfinished_stories = Story.all.select do |story|
-      story.story_segments.last.message["choices"]
-    end
-    @segments = StorySegment.where(story: @story)
+
+    @segments = StorySegment.where(story: @story).to_a.sort { |seg| seg.order }
+
     @story_segment = @segments.last
   end
 
@@ -28,8 +24,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @template_object = PromptTemplate.last
-    template_string = @template_object.prompt
+    template_object = PromptTemplate.last
+    template_string = template_object.prompt
     settings = {
       genre: params[:genre],
       length: params[:length],
@@ -37,33 +33,10 @@ class StoriesController < ApplicationController
       themes: params[:themes]
     }
     prompt = make_story_prompt(template_string, settings)
-    first_segment = OpenaiService.new(prompt).call
-    segment_data = JSON.parse(first_segment)
-    @story = Story.new()
-    @story.title = segment_data["title"]
-    @story.system_prompt = prompt
-    @story.user = current_user
-    @story.prompt_template = @template_object
-    if @story.save!
-      system_params = {
-        order: 0,
-        message: prompt,
-        role: "system",
-        story: @story,
-      }
-      StorySegment.create!(system_params)
-      first_segment_params = {
-        order: 1,
-        message: first_segment,
-        role: "assistant",
-        story: @story,
-      }
-      new_segment = StorySegment.new(first_segment_params)
-      text = new_segment.all_paragraphs.join(" ")
-      img_prompt = OpenaiService.new(text).generate_art_prompt
-      new_segment.set_photo(img_prompt)
-      new_segment.save!
-      redirect_to story_path(@story)
+    new_story = Story.new({user: current_user, prompt_template: template_object})
+    if new_story.save!
+      CreateNewStoryJob.perform_later(prompt, template_object.id, current_user.id, new_story.id)
+      redirect_to loading_screens_path({story_id: new_story.id})
     else
       render :new, status: :unprocessable_entity
     end

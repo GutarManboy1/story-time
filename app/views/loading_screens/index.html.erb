@@ -1,0 +1,19 @@
+<% if @story %>
+  <div class="loading-page" data-controller="story-subscription" data-story-subscription-story-id-value="<%= @story.id %>">
+<% else %>
+  <div class="loading-page" data-controller="segment-subscription" data-segment-subscription-segment-id-value="<%= @segment.id %>">
+<% end %>
+  <h1>Loading...</h1>
+  <div class="loading-screen">
+    <div class="window">
+      <%= image_tag "love_death_robots.png", alt: "love death and robots", class: ['animated-image'] %>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+</div>
