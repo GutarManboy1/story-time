@@ -1,8 +1,60 @@
+.background-image {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
+
+#toggleButton {
+  position:absolute;
+  margin-left:-50px;
+  left:50%;
+  width:100px;
+  bottom:0px;
+  z-index: 1;
+}
+
+.btn-bot{
+  position:absolute;
+  margin-left:-50px;
+  left:50%;
+  width:100px;
+  bottom:0px;
+  z-index: 1;
+}
 
 .story-segment-specific {
-  background-image: image-url('segment.webp');
-  background-size: cover; // Cover the entire page
-  background-repeat: no-repeat;
+  background-color: black;
+}
+
+.d-flex {
+
+  flex-wrap: wrap;
+}
+
+.full-height-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.text-container {
+  position: absolute;
+  bottom: 0;
+  background: rgba(177, 177, 177, 0.685);
+  color: white;
+  padding: 20px;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 1.2em;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .centered {
@@ -15,11 +67,13 @@
   background: none;
   border: none;
   padding: 0;
-  margin: 0 2px; /* Adjust spacing around words as needed */
-  font-size: inherit; /* Make the button text match surrounding text */
+  margin: 0 2px;
+  font-size: inherit;
   cursor: pointer;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .word-btn:hover {
-  text-decoration: underline; /* Optional: Highlight text on hover */
+  text-decoration: underline;
 }
