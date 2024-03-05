@@ -5,31 +5,27 @@
       <!--unfinished stories-->
       <div class="col-md-6">
         <h3>Unfinished Stories</h3>
-        <% 2.times do %>
-          <% @stories.each do |story|%>
+          <% @unfinished_stories.each do |story|%>
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h5 class="card-title"><%= story.title %></h5>
-                <p class="card-text"><%= story.story_segments.from_ai.last.first_paragraph %></p>
+                <h5 class="card-title"><%= link_to story.title, story_path(story) %></h5>
+                <p class="card-text"><%= story.story_segments.from_ai.first.first_paragraph %></p>
                 <%= link_to 'Flashcards', flashcards_index_url,class: "btn btn-primary" %>
               </div>
             </div>
-          <% end %>
         <% end %>
       </div>
       <!--finished stories-->
       <div class="col-md-6">
         <h3>Finished Stories</h3>
-        <% 2.times do %>
-          <% @stories.each do |story|%>
+          <% @completed_stories.each do |story|%>
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h5 class="card-title"><%= story.title %></h5>
-                <p class="card-text"><%= story.story_segments.from_ai.last.first_paragraph %></p>
+                <h5 class="card-title"><%= link_to story.title, story_path(story) %></h5>
+                <p class="card-text"><%= story.story_segments.from_ai.first.first_paragraph %></p>
                 <%= link_to 'Flashcards', flashcards_index_url,class: "btn btn-primary" %>
               </div>
             </div>
-          <% end %>
         <% end %>
       </div>
     </div>
