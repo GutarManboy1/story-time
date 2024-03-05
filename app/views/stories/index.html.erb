@@ -6,7 +6,6 @@
       <!--ContinueReadingStoriesList-->
       <button type="button" class="btn btn-primary" data-bs-toggle="button">Continue Reading</button>
       <div class="list-group">
-         <!--doesnt exist in other version-->
         <% 3.times do %> <!--doesnt exist in other version-->
           <% @stories.each do |story|%> <!--this used to say @unfinished_stories.each do |story|-->
             <div class= "border p-3">
@@ -19,8 +18,9 @@
             </div>
             <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph %></p>
             <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
-          </div>
+            <% end %>
         <% end %>
+          </div>
       </div>
     </div>
     <div class="col col-md-6">
@@ -39,8 +39,9 @@
             </div>
             <p class="mb-1 text-truncate"><%= story.story_segments.from_ai.last.first_paragraph%></p>
             <%= link_to 'Flashcards', flashcards_index_url, class: "btn btn-success" %>
+            <% end %>
+            <% end %>
           </div>
-        <% end %>
       </div>
     </div>
   </div>
