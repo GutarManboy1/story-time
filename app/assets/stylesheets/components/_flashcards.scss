@@ -1,14 +1,38 @@
-#container {
-  width: 100%;
-  height: 300px;
-  background-color: grey;
+.maincardcontainer{
+  position: relative;
+  border-radius: 2px;
+  width: 250px;
+  height: 270px;
+  margin: 0 auto;
 }
-#cards-container{
-   //display: none;
-   border: 2px solid black;
-   padding: 20px;
-   width: 200px;
-   height: 200px;
-   background-color: #867a7a;
-   margin-top: 20px;
+.thecard{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d ;
+  transition: all 0.5s ease;
+}
+.thecard:hover {
+  transform: rotateY(180deg);
+}
+.thefront {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid grey;
+  backface-visibility: hidden;
+  text-align: center;
+  background-color: #ECE9EA;
+}
+
+.theback{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(7, 6, 6);
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  text-align: center;
+  background-color: #626567;
+  color: black;
 }
