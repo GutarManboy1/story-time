@@ -60,9 +60,8 @@ gem 'pagy'
 # gem "sidekiq-failures", "~> 1.0"
 gem 'sidekiq-status'
 # gem 'redis'
-gem 'redis-rails'
 gem "redis", "~> 3.3.3"
-gem "sidekiq", "< 7"
+gem 'sidekiq', '~> 5.0.4'
 gem "sidekiq-failures", "~> 1.0"
 
 group :development, :test do
