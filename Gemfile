@@ -56,11 +56,14 @@ gem "ruby-openai"
 gem "faker"
 gem "open-uri"
 gem 'pagy'
-gem "sidekiq", "~> 6.5.5"
-gem "sidekiq-failures", "~> 1.0"
+# gem "sidekiq", "~> 6.5.5"
+# gem "sidekiq-failures", "~> 1.0"
 gem 'sidekiq-status'
-gem 'redis'
+# gem 'redis'
 gem 'redis-rails'
+gem "redis", "~> 3.3.3"
+gem "sidekiq", "< 7"
+gem "sidekiq-failures", "~> 1.0"
 
 group :development, :test do
   gem "dotenv-rails"
