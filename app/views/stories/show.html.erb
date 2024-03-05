@@ -9,7 +9,7 @@
         <%= link_to 'Begin Reading', story_segment_path(@story_segment), class: ['btn', 'btn-success', 'story-link'] %>
         <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
       </div>
-    <% elsif @choices_exist %>
+    <% elsif @choices_exist == true %>
       <div class="story-links">
         <%= link_to 'Continue Reading', story_segment_path(@story_segment), class: ['btn', 'btn-success', 'story-link'] %>
         <%= link_to 'Back to Menu', root_path, class: ['btn', 'btn-success', 'story-link'] %>
