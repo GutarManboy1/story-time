@@ -23,19 +23,21 @@
       position: relative;
       flex: none;
 
+      .blended-book-title {
+      background-image: linear-gradient(to right, #f5e8bc 0%, #fbdf93 20%, #e3c46e 100%);
+      color: transparent;
+      -webkit-background-clip: text;
+      }
+
       h1 {
         background: none;
-        // position: absolute;
-        // top: 120px;
-        // max-width: 30%;
-
         padding: 15px;
         margin-top: 130px;
         margin-left: 91px;
         margin-right: 40px;
         font-size: 35px;
         text-align: center;
-        color: #CEB26E
+        // color: #CEB26E
       }
     }
 

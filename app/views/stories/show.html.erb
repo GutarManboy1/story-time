@@ -2,7 +2,7 @@
   <div class="book-div">
     <div class="book">
     <%# <%= image_tag "old_book.png", alt: "an old story book" %>
-    <h1><%= @story.title %></h1>
+    <h1 class="blended-book-title"><%= @story.title %></h1>
     </div>
     <% if @story.story_segments.count == 2 %>
       <div class="story-links">
