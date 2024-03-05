@@ -16,14 +16,32 @@
     align-items: center;
 
 
-    h1 {
-      background: none;
-      position: absolute;
-      top: 120px;
-      max-width: 30%;
-      margin-left: 20px;
-      font-size: 35px;
+    .book {
+      height: 518px;
+      width: 458px;
+      background-image: url("old_book.png");
+      position: relative;
+      flex: none;
+
+      .blended-book-title {
+      background-image: linear-gradient(135deg, #f2e9ca 0%, #fbdf93 35%, #e3c46e 100%);
+      color: transparent;
+      -webkit-background-clip: text;
+      }
+
+      h1 {
+        background: none;
+        padding: 15px;
+        margin-top: 130px;
+        margin-left: 91px;
+        margin-right: 40px;
+        font-size: 35px;
+        text-align: center;
+        text-shadow: -2px -2px 2px #89712e57;
+      }
     }
+
+
 
     .story-links {
       display: flex;
@@ -37,12 +55,12 @@
       }
     }
 
-    img {
-      height: 60%;
-      width: auto;
-      margin-top: 20px;
-      position: relative;
-    }
+    // img {
+    //   height: 60%;
+    //   width: auto;
+    //   margin-top: 20px;
+    //   position: relative;
+    // }
   }
 
 }
