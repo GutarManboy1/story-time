@@ -1,5 +1,95 @@
-.main-menu-buttons {
-  display: flex;
-  justify-content: space-around;
-  flex-basis: 1;
+.main-menu-content {
+  background-image: url("galaxies.png");
+  background-size: cover;
+  height: 100vh;
+
+  .main-menu-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+
+    .main-menu-button {
+      flex-basis: 25%;
+
+      img {
+        transition: 0.5s;
+      }
+
+      img:hover {
+        background-image: radial-gradient(0% white, 100% black);
+        background-blend-mode: multiply;
+        scale: 115%;
+        transition: 0.5s;
+      }
+
+      img:hover + .main-menu-button-text {
+        opacity: 100%;
+        transition-delay: 0.3s;
+        text-shadow: 0 0 5px white;
+        transition: 0.5s;
+        translate: 0 100%;
+        scale: 150%;
+        color: $light-gray;
+        text-decoration: none;
+      }
+
+
+    }
+
+    .new-story-button {
+      margin-top: 65px;
+    }
+
+    .library-button {
+      margin-top: 60px;
+    }
+
+    .flashcards-button {
+      margin-top: 100px;
+    }
+  }
+
+  .main-menu-button-text {
+    opacity: 0%;
+    transition: 0.5s;
+    text-decoration: none;
+    text-shadow: none;
+    color: $light-gray;
+  }
+
+  .test {
+    background-image: linear-gradient(to right, #ece9ea00 0%, #ece9ea9a 20%, #ECE9EA 50%, #ece9ea9a 80%, #ece9ea00 100% );
+
+    .menu-message {
+      text-align: center;
+      margin-top: 20px;
+
+      h1 {
+        // color: #fff;
+        font-size: 70px;
+        // text-transform: uppercase;
+        // font-weight: 700;
+        // font-family: "Josefin Sans", sans-serif;
+        background-image: url("galaxies.png"), linear-gradient(to right,#bedaf22a 10%, #46afe026 50%, #77bcdd26 60%);
+        // background-size: auto auto;
+        // background-clip: border-box;
+        background-size: 200% auto;
+        // color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 30s linear infinite;
+        // text-shadow: 0 5 3px white;
+        // -webkit-text-stroke: 1px rgba(224, 222, 241, 0.677);
+        // display: inline-block;
+      }
+    }
+  }
+
+  @keyframes textclip {
+    to {
+      background-position: 200% -50%;
+    }
+  }
 }

@@ -1,35 +1,30 @@
 <% if user_signed_in? %>
   <!--mainpagew/buttons&footer-->
-  <div class= "content">
-  <div class="banner" style= "background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'galaxies.png' %>);">
-  <h1 class="position-top">Choose Your Path</h1>
-  <div class="main-menu-buttons">
-    <%= link_to new_story_path, class: "new-story-button" do %>
-      <div>
-        <%= image_tag "inkpot-small.png", alt: "text" %>
-        <h2>New Story</h2>
-      </div>
-    <% end %>
-    <%= link_to stories_path, class: "library-button" do %>
-      <div>
-        <%= image_tag "bookpiles-small.png", alt: "text" %>
-        <h2>Library</h2>
-      </div>
-    <% end %>
-    <%= link_to flashcards_path, class:"flashcards-button"  do %>
-      <div>
-        <%= image_tag "gradcap-small.png", alt: "text" %>
-        <h2>Study</h2>
-      </div>
-    <% end %>
-  </div>
-  </div>
-  </div>
-  <div class="footer">
-    <div class="footer-links">
-      <a href="linkedin.com/in/jason-sturgeon-823407278/"><i class="fab fa-linkedin"></i></a>
-      <a href="linkedin.com/in/glenn-torrens-2318b8267"><i class="fab fa-linkedin"></i></a>
-      <a href="linkedin.com/in/alexandervoeler"><i class="fab fa-linkedin"></i></a>
+  <div class= "main-menu-content">
+  <div class="test">
+    <div class="menu-message">
+      <h1>Welcome back, Reader!</h1>
+    </div>
+    </div>
+    <div class="main-menu-buttons">
+      <%= link_to new_story_path, class: "main-menu-button new-story-button" do %>
+        <div>
+          <%= image_tag "inkpot-small.png", alt: "text" %>
+          <h2 class="main-menu-button-text">New Story</h2>
+        </div>
+      <% end %>
+      <%= link_to stories_path, class: "main-menu-button library-button" do %>
+        <div>
+          <%= image_tag "bookpiles-small.png", alt: "text" %>
+          <h2 class="main-menu-button-text">Library</h2>
+        </div>
+      <% end %>
+      <%= link_to flashcards_path, class:"main-menu-button flashcards-button"  do %>
+        <div>
+          <%= image_tag "gradcap-small.png", alt: "text" %>
+          <h2 class="main-menu-button-text">Study</h2>
+        </div>
+      <% end %>
     </div>
   </div>
 <% else %>
