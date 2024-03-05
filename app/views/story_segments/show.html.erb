@@ -1,10 +1,11 @@
 <body class="story-segment-specific">
+
   <div class="container background-image full-height-container pt-3" style="background-image: url('<%= cl_image_path(@story_segment.photo.key, crop: :fill) %>');">
     <div class="container mt-1 mb-4">
       <div class="container">
-          <div class="d-flex bottomright justify-content-center mt-3 mb-4" data-controller="next-paragraph">
-            <button id="toggleButton" class="btn">
-            <%= image_tag("Next_page.png") %>
+          <div class="d-flex bottomright justify-content-center mt-3 mb-4  bottomright" data-controller="next-paragraph">
+            <button id="toggleButton" class="btn btn-success">
+            Next
             </button>
           </div>
         <div class="text-container" data-controller="word-lookup">
@@ -57,5 +58,6 @@
       </div>
     </div>
   </div>
+
   <%= render "modal" %>
 </body>
