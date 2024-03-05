@@ -24,7 +24,7 @@
       flex: none;
 
       .blended-book-title {
-      background-image: linear-gradient(to right, #f5e8bc 0%, #fbdf93 20%, #e3c46e 100%);
+      background-image: linear-gradient(135deg, #f2e9ca 0%, #fbdf93 35%, #e3c46e 100%);
       color: transparent;
       -webkit-background-clip: text;
       }
@@ -37,7 +37,7 @@
         margin-right: 40px;
         font-size: 35px;
         text-align: center;
-        // color: #CEB26E
+        text-shadow: -1px -1px 1px #89712e75;
       }
     }
 
