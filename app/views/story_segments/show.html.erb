@@ -1,17 +1,11 @@
 <body class="story-segment-specific">
-
   <div class="container background-image full-height-container pt-3" style="background-image: url('<%= cl_image_path(@story_segment.photo.key, crop: :fill) %>');">
     <div class="container mt-1 mb-4">
-      <div class="container">
-          <div class="d-flex bottomright justify-content-center mt-3 mb-4  bottomright" data-controller="next-paragraph">
-            <button id="toggleButton" class="btn btn-success">
-            Next
-            </button>
-          </div>
+      <div class="container"data-controller="next-paragraph" data-next-paragraph-current-index-value="<%= params[:paragraph] %>">
         <div class="text-container" data-controller="word-lookup">
           <% if @story_segment.role == "assistant" %>
             <% @paragraphs.each_with_index do |paragraph, p_index| %>
-              <div class="toggle-div" style="display: none;">
+              <div class="toggle-div" <%= "style=\"display: none;\"".html_safe if p_index >= params[:paragraph].to_i %>>
                 <p class="d-flex justify-content-center" style="font-size: x-large;">
                   <% paragraph.split(' ').each_with_index do |word, w_index| %>
                     <button data-controller="word-lookup"
@@ -58,6 +52,5 @@
       </div>
     </div>
   </div>
-
   <%= render "modal" %>
 </body>

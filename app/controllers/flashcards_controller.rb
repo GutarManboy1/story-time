@@ -4,7 +4,6 @@ class FlashcardsController < ApplicationController
     @story = Story.find_by(id: params[:story_id])
     if @story
       @flashcards = @flashcards.where(story_segment: @story.story_segments)
-
     end
     @search_query = params[:search_query]
 
@@ -12,10 +11,9 @@ class FlashcardsController < ApplicationController
     @story_segments = StorySegment.where(id: @flashcards.pluck(:story_segment_id))
     @stories = Story.where(id: @story_segments.pluck(:story_id))
   end
-end
 
   def show
-    @flashcards = Flashcard.find(params[:id])
+    @flashcard = Flashcard.find(params[:id])
   end
 
   def new
@@ -23,16 +21,22 @@ end
   end
 
   def create
+    # POST story_segments/114/flashcards?paragraph=2
+    @story_segment = StorySegment.find(params[:story_segment_id])
     @flashcard = Flashcard.new(flashcard_params)
-    if @flashcard.save!
-      redirect_to flashcards_path
+    @flashcard.story_segment = @story_segment
+    @flashcard.user = current_user
+
+    if @flashcard.save
+      redirect_to story_segment_path(@flashcard.story_segment, paragraph: params[:paragraph])
     else
-      render 'new'
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
 
   def flashcard_params
-    params.require(:flashcard).permit(:answer)
+    params.require(:flashcard).permit(:excerpt, :answer)
   end
+end
