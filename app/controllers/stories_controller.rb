@@ -3,10 +3,10 @@ require "json"
 class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
-
     @segments = StorySegment.where(story: @story).to_a.sort { |seg| seg.order }
-
     @story_segment = @segments.last
+    data = JSON.parse(@story_segment.message)
+    @choices_exist = data.key?("choices")
   end
 
   def index
