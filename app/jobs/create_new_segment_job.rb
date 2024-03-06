@@ -39,7 +39,6 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
           puts "MMMMMMMMMMMMMMMMMMMMMMMM Choices are ok.  Story should continue."
           picture_segment = CreateNewArtJob.perform_now({paragraphs: segment_data["paragraphs"].join(" "), segment: new_segment})
           segment_params = {
-            order: input[:order],
             message: segment_message,
             role: 'assistant'
           }
@@ -75,7 +74,6 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
         puts "MMMMMMMMMMMMMMMMMMMMMMMM No choices found, this will be the last segment."
         picture_segment = CreateNewArtJob.perform_now({paragraphs: segment_data["paragraphs"].join(" "), segment: new_segment})
         segment_params = {
-          order: input[:order],
           message: segment_message,
           role: 'assistant'
         }
