@@ -5,8 +5,8 @@
 
   .main-menu-buttons {
     display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+    justify-content: space-evenly;
+    margin: 50px 20px 0 20px;
 
     .main-menu-button {
       flex-basis: 25%;

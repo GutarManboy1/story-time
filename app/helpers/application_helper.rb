@@ -1,5 +1,4 @@
 module ApplicationHelper
-  include Pagy::Frontend
 
   def welcome_message
     if user_signed_in?
