@@ -17,7 +17,6 @@ class StorySegmentsController < ApplicationController
     # @story_segment.next_segment is ideal
     # @pagy, @paragraphs = pagy(@parsed_segment["paragraphs"])
     # @parsed_segment = JSON.parse(@story_segment.message)
-    @is_finished = !@story_segment.story.story_segments.last.message["choices"]
     @paragraphs = @story_segment.safe_message["paragraphs"]
     @segment_num = @story_segment.safe_message["segment"]
     @choices = @story_segment.safe_message["choices"]
@@ -32,9 +31,9 @@ class StorySegmentsController < ApplicationController
     story = story_segment.story
     choice = params["story_segment"]["choice"]
     user_segment = StorySegment.create!({story: story, order: story_segment.order + 1, message: choice, role: "user"})
-    new_segment = StorySegment.new({story: story})
+    new_segment = StorySegment.new({story: story, order: story_segment.order + 2})
     if new_segment.save!
-      CreateNewSegmentJob.perform_later({new_segment_id: new_segment.id, story_id: story.id, order: story_segment.order + 2})
+      CreateNewSegmentJob.perform_later({new_segment_id: new_segment.id, story_id: story.id})
       redirect_to loading_screens_path({segment_id: new_segment.id})
     else
       render :show, status: :unprocessable_entity

@@ -47,8 +47,8 @@ class StorySegment < ApplicationRecord
 
     url = response["data"][0]["url"]
     file = URI.open(url)
-    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM  url below"
-    p url
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM  Url below of the generated image below..."
+    puts url
 
     photo.purge if photo.attached?
     photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
