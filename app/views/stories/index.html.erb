@@ -11,7 +11,7 @@
           </div>
           <p><%= link_to story.title, story_path(story), style: "text-decoration: none; color: white;" %></p>
           <div>
-            <%= link_to 'Flashcards', flashcards_index_url, class: "mb-3 btn btn-primary" %>
+            <%= link_to 'Flashcards', story_flashcards_path(story), class: "mb-3 btn btn-primary" %>
           </div>
         </div>
       <% end %>
