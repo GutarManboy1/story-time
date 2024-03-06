@@ -6,7 +6,7 @@ class FlashcardsController < ApplicationController
       @flashcards = @flashcards.where(story_segment: @story.story_segments)
     end
     @search_query = params[:search_query]
-
+    
     @flashcards = @flashcards.search(@search_query) if @search_query.present?
     @story_segments = StorySegment.where(id: @flashcards.pluck(:story_segment_id))
     @stories = Story.where(id: @story_segments.pluck(:story_id))

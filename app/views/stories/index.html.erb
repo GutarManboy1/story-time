@@ -10,7 +10,7 @@
               <div class="card-body">
                 <h5 class="card-title"><%= link_to story.title, story_path(story) %></h5>
                 <p class="card-text"><%= story.story_segments.from_ai.first.first_paragraph %></p>
-                <%= link_to 'Flashcards', flashcards_index_url,class: "btn btn-primary" %>
+                <%= link_to 'Flashcards', story_flashcards_path(story),class: "btn btn-primary" %>
               </div>
             </div>
         <% end %>
