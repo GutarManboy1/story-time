@@ -12,7 +12,7 @@ class Flashcard < ApplicationRecord
 
     if query.present?
       joins(story_segment: :story)
-        .where('stories.title LIKE :query OR flashcards.created_at = :date', query: "%#{query}%", date: date )
+        .where('stories.title ILIKE :query OR flashcards.created_at = :date OR flashcards.excerpt ILIKE :query', query: "%#{query}%", date: date )
     else
       all
     end

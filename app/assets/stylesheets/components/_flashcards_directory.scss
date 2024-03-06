@@ -1,13 +1,14 @@
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+}
 .flashcards-directory {
   background-image: image-url('poppinsValley.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   background-attachment: fixed;
-}
-* {
-  box-sizing: border-box;
-  font-weight: normal;
+  overflow:auto;
 }
 
 body {
@@ -20,6 +21,7 @@ body {
 
 h1 {
   font-size: 2.2em;
+  
 }
 
 // base
