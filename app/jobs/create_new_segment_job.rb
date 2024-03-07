@@ -7,6 +7,7 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
     puts "MMMMMMMMMMMMMMMMMMMMMMMM Now entering CreateNewSegmentJob..."
     story = Story.find(input[:story_id])
     root_segment = StorySegment.find(input[:root_segment_id])
+    root_segment_id = input[:root_segment_id]
     root_order = root_segment.order
     new_segment_hash = {story_id: input[:story_id]}
     big_bubba = []
@@ -44,14 +45,14 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
         puts "MMMMMMMMMMMMMMMMMMMMMMMM Choices found in GPT response... validating them..."
         if segment_data["choices"].kind_of?(Array) && segment_data["choices"].length == 2
           puts "MMMMMMMMMMMMMMMMMMMMMMMM Choices are ok.  Story should continue."
-          puts "MMMMMMMMMMMMMMMMMMMMMMMM Putting together choice #{user_choice} segment hash..."
+          puts "MMMMMMMMMMMMMMMMMMMMMMMM Putting together choice #{input[:user_choice]} segment hash..."
           img_prompt = OpenaiService.new(segment_data["paragraphs"].join(" ")).generate_art_prompt
           client = OpenAI::Client.new
           response = client.images.generate(parameters:
             {
               model: "dall-e-3",
               prompt: "#{img_prompt}",
-              size: "512x512"
+              size: "1024x1024"
             })
           url = response["data"][0]["url"]
           file = URI.open(url)
@@ -61,8 +62,9 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
           new_segment_hash[:role] = "assistant"
           new_segment_hash[:order] = root_order.to_i + 2
           new_segment_hash[:image] = url
-          cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{user_choice}"
+          cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{input[:user_choice]}"
           Rails.cache.write(cache_id, new_segment_hash, expires_in: 1.hour)
+          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash, cache_id: cache_id})
           # segment_params = {
           #   message: segment_message,
           #   role: 'assistant'
@@ -97,14 +99,14 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
         end # choices validation end tag pass/fail
       else
         puts "MMMMMMMMMMMMMMMMMMMMMMMM No choices found, this will be the last segment."
-        puts "MMMMMMMMMMMMMMMMMMMMMMMM Putting together choice #{user_choice} segment hash..."
+        puts "MMMMMMMMMMMMMMMMMMMMMMMM Putting together choice #{input[:user_choice]} segment hash..."
           img_prompt = OpenaiService.new(segment_data["paragraphs"].join(" ")).generate_art_prompt
           client = OpenAI::Client.new
           response = client.images.generate(parameters:
             {
               model: "dall-e-3",
               prompt: "#{img_prompt}",
-              size: "512x512"
+              size: "1024x1024"
             })
           url = response["data"][0]["url"]
           file = URI.open(url)
@@ -114,9 +116,9 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
           new_segment_hash[:role] = "assistant"
           new_segment_hash[:order] = root_order.to_i + 2
           new_segment_hash[:image] = url
-          cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{user_choice}"
+          cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{input[:user_choice]}"
           Rails.cache.write(cache_id, new_segment_hash, expires_in: 1.hour)
-          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: user_choice, new_segment_hash: new_segment_hash, cache_id: cache_id})
+          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash, cache_id: cache_id})
         # picture_segment = CreateNewArtJob.perform_now({paragraphs: segment_data["paragraphs"].join(" "), segment: new_segment_hash})
         # picture_segment.message = segment_message
         # picture_segment.role = "assistant"

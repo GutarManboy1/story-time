@@ -59,4 +59,5 @@ class StorySegment < ApplicationRecord
     photo.purge if photo.attached?
     photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
     return photo
+  end
 end

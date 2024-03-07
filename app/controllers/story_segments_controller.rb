@@ -14,9 +14,9 @@ class StorySegmentsController < ApplicationController
       if @choices.present?
         story = @story_segment.story
         # path_one_user_segment = StorySegment.new({story: story, order: story_segment.order + 1, message: "1", role: "user"})
-        CreateNewSegmentJob.perform_later({user_choice: "1", story_id: story.id, root_segment_id: @story_segment.id})
+        CreateNewSegmentJob.perform_later({user_choice: 1, story_id: story.id, root_segment_id: @story_segment.id})
         # path_two_user_segment = StorySegment.new({story: story, order: story_segment.order + 1, message: "2", role: "user"})
-        CreateNewSegmentJob.perform_later({user_choice: "2", story_id: story.id, root_segment_id: @story_segment.id})
+        CreateNewSegmentJob.perform_later({user_choice: 2, story_id: story.id, root_segment_id: @story_segment.id})
       end
     end
       # choice_one_segment = CreateNewSegmentJob.perform_later({new_segment_id: new_segment.id, story_id: story.id, order: story_segment.order + 2})
