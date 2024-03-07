@@ -9,8 +9,8 @@ export default class extends Controller {
       { received: (data) =>
         {
           console.log(data)
-          if (data.action === 'redirect') {
-            window.location.href = data.path;
+          if (data.action === 'segment_ready') {
+            
           }
         }
       }       // the data is what you got from the backend, if what you got was a hash (which is the most likely case) you can access the stuff inside the hash with .key  (you can use the . instead of [] becaues this is JS, not ruby, and JS allows this notation.)
