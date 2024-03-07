@@ -44,12 +44,18 @@ class StorySegment < ApplicationRecord
         prompt: "#{prompt}",
         size: "1024x1024"
       })
-
     url = response["data"][0]["url"]
     file = URI.open(url)
     puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM  Url below of the generated image below..."
     puts url
 
+    photo.purge if photo.attached?
+    photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
+    return photo
+  end
+
+  def quick_set_photo(url)
+    file = URI.open(url)
     photo.purge if photo.attached?
     photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
     return photo
