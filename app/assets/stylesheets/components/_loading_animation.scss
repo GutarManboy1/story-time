@@ -8,6 +8,7 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  transform: translateX(-100%);
 
   img {
     position: absolute;
@@ -17,32 +18,11 @@
     width: 200px;
     animation: moveImage 8s linear infinite;
   }
-
-  :hover {
-    height: 100px;
-    width: 100px;
-    background-color: rgb(0, 0, 0);
-    margin: 15px;
-    border-radius: 15px;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    right: -50px;
-
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 200px;
-      width: 200px;
-      animation: moveImage 8s linear infinite;
-    }
-  }
 }
 
-.offscreen {
-  transition: 0.5s;
-  right: -50px;
+.onscreen {
+  transition: transform 0.5s ease;
+  transform: translateX(0);
 }
 
 

@@ -1,5 +1,5 @@
 <body class="story-segment-specific">
-  <div class="loading-animation-container offscreen">
+  <div class="loading-animation-container <%= 'onscreen' if session[:background_job_running] %>">
     <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
       <rect width="100" height="100" fill="black" rx="15" class="filter"/>
     </svg>
