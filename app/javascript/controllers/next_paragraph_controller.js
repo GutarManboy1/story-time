@@ -18,9 +18,15 @@ export default class extends Controller {
     // textContainer.style.display = "none";
     console.log(window.location.pathname);
     document.addEventListener('keyup', () => {
-
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
       Turbo.visit(`${window.location.pathname}?paragraph=${this.currentIndexValue + 1}`);
-
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
   //     window.scrollTo({
   //       top: document.body.scrollHeight,
   //       behavior: 'smooth'
