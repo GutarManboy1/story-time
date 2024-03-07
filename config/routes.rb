@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'stories/show'
   devise_for :users
   root to: "pages#home"
+  get 'main', to: 'pages#main'
   get "up" => "rails/health#show", as: :rails_health_check
   get 'stories', to: 'stories#index'
   get 'loading_screens', to: 'loading_screens#index'
