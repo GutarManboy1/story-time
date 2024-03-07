@@ -3,7 +3,7 @@
     <%= simple_form_for [@story_segment, Flashcard.new], url: story_segment_flashcards_path(@story_segment, paragraph: params[:paragraph]) do |f| %>
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="definitionModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="definitionModalLabel"></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

@@ -1,60 +1,70 @@
-.background-image {
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+.story-segment-book {
+  background-image: asset_url("bookstory.png");
+  background-color: black;
+  flex: none;
   width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-
+  height: calc(100vh - 66px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
+
+.story-row {
+  display: flex;
+}
+
+.story-column {
+  width: 50%;
+  padding: 10px;
+
+  .story-segment-image img {
+    width: 350px;
+  }
+
+  .story-segment-text {
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 80%;
+    border-radius: 10px;
+    font-size: 1.2em;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .choice-btn {
+
+  }
+}
+
+
 
 #toggleButton {
-  position:absolute;
-  margin-left:-50px;
-  left:50%;
-  width:100px;
-  bottom:0px;
+  position: absolute;
+  margin-left: -50px;
+  left: 50%;
+  width: 100px;
+  bottom: 0px;
   z-index: 1;
 }
 
-.btn-bot{
-  position:absolute;
-  margin-left:-50px;
-  left:50%;
-  width:100px;
-  bottom:0px;
-  z-index: 1;
-}
 
-.story-segment-specific {
-  background-color: black;
+.btn-bot {
+  position: absolute;
+  margin-left: -50px;
+  left: 50%;
+  width: 100px;
+  bottom: 0px;
+  z-index: 1;
 }
 
 .d-flex {
-
   flex-wrap: wrap;
 }
 
 .full-height-container {
   position: relative;
   min-height: 100vh;
-}
-
-.text-container {
-  position: absolute;
-  bottom: 0;
-  background: rgba(177, 177, 177, 0.685);
-  color: white;
-  padding: 20px;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  box-sizing: border-box;
-  border-radius: 10px;
-  font-size: 1.2em;
-  white-space: normal;
-  word-wrap: break-word;
 }
 
 .centered {
