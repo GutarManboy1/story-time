@@ -9,23 +9,17 @@
   background-size: cover;
 }
 
+
 .story-row {
   display: flex;
 }
 
-.story-column {
-  display: flex;
-  justify-content: center;
+.story-column-left {
   width: 50%;
   padding: 10px;
 
-  .story-segment-image img {
-    margin-right:25%;
-    margin-top: 5%;
-    width: 50%;
-  }
-
   .story-segment-text {
+    margin-left: 21%;
     color: white;
     padding: 20px;
     box-sizing: border-box;
@@ -35,9 +29,24 @@
     white-space: normal;
     word-wrap: break-word;
   }
+}
+.story-column-right {
+  width: 50%;
+  padding: 10px;
+  padding-right: 13%;
+
+  .story-segment-image img {
+
+    margin-top: 5%;
+    width: 85%;
+  }
+
+  .story-segment-image {
+    width: 100%;
+  }
 
   .choice-btn {
-
+    white-space: normal;
   }
 }
 
