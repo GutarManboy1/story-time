@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   padding: 185px 0;
-  height: 100%;
+  height: 100vh;
 }
 
 .banner h1 p {
@@ -28,14 +28,19 @@ h1 {
 }
 
 
-.banner p {
-  font-size: 20px;
+.banner p{
+  font-size: 25px;
   color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  // opacity: .7;
+  // text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.banner span{
+  color: white;
+  font-size: 23px;
 }
 
 .banner .position-top {

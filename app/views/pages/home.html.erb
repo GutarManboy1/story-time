@@ -1,56 +1,23 @@
-<% if user_signed_in? %>
-  <div class="loading-animation-container">
-    <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100" height="100" fill="black" rx="15" class="filter"/>
-    </svg>
-    <%= image_tag "love_death_robots.png", alt: "text" %>
-  </div>
-  <!--mainpagew/buttons&footer-->
-  <div class= "main-menu-content">
-  <div class="test">
-    <div class="menu-message">
-      <h1>Welcome back, Reader!</h1>
-    </div>
-    </div>
-    <div class="main-menu-buttons">
-      <%= link_to new_story_path, class: "main-menu-button new-story-button" do %>
-        <div>
-          <%= image_tag "inkpot-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">New Story</h2>
-        </div>
-      <% end %>
-      <%= link_to stories_path, class: "main-menu-button library-button" do %>
-        <div>
-          <%= image_tag "bookpiles-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">Library</h2>
-        </div>
-      <% end %>
-      <%= link_to flashcards_path, class:"main-menu-button flashcards-button"  do %>
-        <div>
-          <%= image_tag "gradcap-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">Study</h2>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% else %>
+
   <!--banner&footer-->
   <div class= "content">
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'splashpage.png' %>);">
     <div class="container">
       <h1>Story Time</h1>
       <p>Learn English Through Your Own AI Storyteller</p>
+      <span> Create your own Worlds </span><br>
+      <span> Save and Revisit your Creations  </span><br>
+      <span> Review your Selected Text </span>
       <div class="d-flex justify-content-center">
-        <%=link_to 'Start Now', new_user_session_url, class: "btn btn-primary px-5" %>
+        <%=link_to 'Start Now', main_path, class: "btn btn-primary px-5 mt-5" %>
       </div>
     </div>
   </div>
   </div>
   <div class="footer">
     <div class="footer-links">
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.linkedin.com/in/alexandervoeler/" target=blank><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.linkedin.com/in/glenn-torrens-2318b8267/" target=blank><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.linkedin.com/in/jason-sturgeon-823407278/" target=blank><i class="fab fa-linkedin"></i></a>
     </div>
   </div>
-<% end %>
