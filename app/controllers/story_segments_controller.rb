@@ -34,7 +34,7 @@ class StorySegmentsController < ApplicationController
     new_segment = StorySegment.new({story: story, order: story_segment.order + 2})
     if new_segment.save!
       CreateNewSegmentJob.perform_later({new_segment_id: new_segment.id, story_id: story.id})
-      redirect_to loading_screens_path({segment_id: new_segment.id})
+      redirect_to story_segment_path({segment_id: new_segment.id})
     else
       render :show, status: :unprocessable_entity
     end
