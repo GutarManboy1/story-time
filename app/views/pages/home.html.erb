@@ -1,22 +1,22 @@
 <!--banner&footer-->
-  <div class= "content">
+<div class= "content">
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'splashpage.png' %>);">
     <div class="container">
       <h1>Story Time</h1>
       <p>Learn English Through Your Own AI Storyteller</p>
-      <span> Create your own Worlds </span><br>
-      <span> Save and Revisit your Creations  </span><br>
-      <span> Review your Selected Text </span>
+      <em><%= content_tag :span, "Create your own Worlds", style: "font-family: 'cormorant', sans-serif;" %></em><br>
+      <em><%= content_tag :span, "Save and Revisit your Creations", style: "font-family: 'cormorant', sans-serif;" %></em><br>
+      <em><%= content_tag :span, "Review your Selected Text", style: "font-family: 'cormorant', sans-serif;" %></em><br>
       <div class="d-flex justify-content-center">
         <%=link_to 'Start Now', main_path, class: "btn btn-primary px-5 mt-5" %>
       </div>
     </div>
   </div>
+</div>
+<div class="footer">
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/alexandervoeler/" target=blank><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.linkedin.com/in/glenn-torrens-2318b8267/" target=blank><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.linkedin.com/in/jason-sturgeon-823407278/" target=blank><i class="fab fa-linkedin"></i></a>
   </div>
-  <div class="footer">
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/alexandervoeler/" target=blank><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.linkedin.com/in/glenn-torrens-2318b8267/" target=blank><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.linkedin.com/in/jason-sturgeon-823407278/" target=blank><i class="fab fa-linkedin"></i></a>
-    </div>
-  </div>
+</div>
