@@ -14,11 +14,15 @@
 }
 
 .story-column {
+  display: flex;
+  justify-content: center;
   width: 50%;
   padding: 10px;
 
   .story-segment-image img {
-    width: 350px;
+    margin-right:25%;
+    margin-top: 5%;
+    width: 50%;
   }
 
   .story-segment-text {
@@ -27,7 +31,7 @@
     box-sizing: border-box;
     width: 80%;
     border-radius: 10px;
-    font-size: 1.2em;
+    font-size: 1vw;
     white-space: normal;
     word-wrap: break-word;
   }

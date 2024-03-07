@@ -1,11 +1,6 @@
 <div class="story-segment-show-page-container story-segment-book">
   <div class="story-row">
-    <div class="story-column">
-      <div class="story-segment-image ">
-        <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
-      </div>
-    </div>
-    <div class="story-column">
+  <div class="story-column">
       <div class="story-segment-text" data-controller="word-lookup">
         <% if @story_segment.role == "assistant" %>
           <% @paragraphs.each_with_index do |paragraph, p_index| %>
@@ -50,6 +45,12 @@
         <% end %>
       </div>
     </div>
+    <div class="story-column">
+      <div class="story-segment-image ">
+        <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
+      </div>
+    </div>
+
   </div>
 </div>
 <%= render "modal" %>
