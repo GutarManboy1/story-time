@@ -1,7 +1,7 @@
 
 <div class="story-segment-show-page-container story-segment-book">
   <div class="story-row">
-    <div class="story-column">
+    <div class="story-column-left">
       <div class="story-segment-text" data-controller="word-lookup">
         <% if @story_segment.role == "assistant" %>
           <% @paragraphs.each_with_index do |paragraph, p_index| %>
@@ -55,12 +55,36 @@
         <% end %>
       </div>
     </div>
-    <div class="story-column">
+    <div class="story-column-right">
       <div class="story-segment-image ">
         <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
       </div>
+      <div>
+        <% if @next_segment.present? %>
+          <%= link_to 'Continue', story_segment_path(@next_segment), class: 'btn btn-primary'%>
+        <% elsif @choices.present? %>
+          <% @choices.each_with_index do |choice, index| %>
+            <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+              <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
+              <%= f.input :choice, as: :hidden, input_html: { value: "#{index + 1}"} %>
+              <%= f.submit choice, class: 'btn choice-btn', style: "font-size: large;" %>
+            <% end %>
+          <% end %>
+        <% elsif !@choices.present? %>
+          <div class="container d-flex justify-content-center">
+            <h3>You have reached the end of the story.</h3>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="pr-3">
+              <%= link_to 'Back to Menu', root_path, class: 'btn btn-primary'%>
+            </div>
+            <div class="pl-3">
+              <%= link_to 'Back to Book Cover', story_path(@story_segment.story), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-
   </div>
 </div>
 <%= render "modal" %>
