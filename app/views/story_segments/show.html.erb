@@ -22,19 +22,19 @@
             <% elsif p_index == @paragraphs.size - 1 && @choices.present? %>
               <div data-controller="segment-subscription" data-segment-subscription-segment-id-value="<%= @story_segment.id %>">
                 <div class="d-flex justify-content-center">
-                  <%= simple_form_for @story_segment do |f| %>
-                    <%= f.input :cache_id_1, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheId1" } } %>
+                  <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+                    <%= f.input :cache_id_1, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdOne" } } %>
                     <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
                     <%= f.input :choice, as: :hidden, input_html: { value: "1"} %>
-                    <%= f.submit @choice[0], class: 'btn choice-btn', input_html: { disabled: true, data: { segment_subscription_target: "submit1" }}, style: "font-size: large;" %>
+                    <%= f.submit @choices[0], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitOne" }, style: "font-size: large;" %>
                   <% end %>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <%= simple_form do |f| %>
-                    <%= f.input :cache_id_2, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheId2" } } %>
+                  <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+                    <%= f.input :cache_id_2, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdTwo" } } %>
                     <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
                     <%= f.input :choice, as: :hidden, input_html: { value: "2"} %>
-                    <%= f.submit @choice[1], class: 'btn choice-btn', input_html: { disabled: true, data: { segment_subscription_target: "submit2" } }, style: "font-size: large;" %>
+                    <%= f.submit @choices[1], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitTwo" }, style: "font-size: large;" %>
                   <% end %>
                 </div>
               </div>

@@ -34,15 +34,29 @@ class StorySegmentsController < ApplicationController
   end
 
   def create
-    story_segment = StorySegment.find(params["story_segment"]["previous_story_segment_id"])
-    story = story_segment.story
-    choice = params["story_segment"]["choice"]
-    user_segment = StorySegment.create!({story: story, order: story_segment.order + 1, message: choice, role: "user"})
-    new_segment = StorySegment.new({story: story, order: story_segment.order + 2})
-    if new_segment.save!
-      CreateNewSegmentJob.perform_later({new_segment_id: new_segment.id, story_id: story.id})
-      redirect_to loading_screens_path({segment_id: new_segment.id})
+    # story_segment = StorySegment.find(params["story_segment"]["previous_story_segment_id"])
+    # story = story_segment.story
+    # choice = params["story_segment"]["choice"]
+    # user_segment = StorySegment.create!({story: story, order: story_segment.order + 1, message: choice, role: "user"})
+    # new_segment = StorySegment.new({story: story, order: story_segment.order + 2})
+    choice = params[:story_segment][:choice].to_i
+    cached_data = nil
+    if choice == 1
+      p cached_data = JSON.parse(params[:story_segment][:cache_id_1])
     else
+      p cached_data = JSON.parse(params[:story_segment][:cache_id_2])
+    end
+    story = Story.find(params[:story_id])
+    order = cached_data["order"]
+    message = cached_data["message"]
+    p url = cached_data["image"]
+    StorySegment.create!({story_id: story.id, order: order.to_i - 1, message: choice, role: "user"})
+    new_segment = StorySegment.new({ story_id: story.id, order: order.to_i, message: message, role: "assistant" })
+    new_segment.quick_set_photo(url) if url
+    if new_segment.save!
+      redirect_to story_segment_path(new_segment.id)
+    else
+      raise
       render :show, status: :unprocessable_entity
     end
   end

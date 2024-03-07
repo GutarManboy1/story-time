@@ -1,9 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 import { createConsumer } from "@rails/actioncable"
 export default class extends Controller {
-  static targets = ["cacheId1", "cacheId2", "submit1", "submit2"]
+  static targets = ["cacheIdOne", "cacheIdTwo", "submitOne", "submitTwo"]
+  static values = {segmentId: Number}
   connect() {
     console.log(this.segmentIdValue)
+    console.log(this.cacheIdOneTarget)
+    console.log(this.submitOneTarget)
     let completed = 0;
     this.channel = createConsumer().subscriptions.create(
       { channel: "SegmentChannel", id: this.segmentIdValue },
@@ -13,17 +16,18 @@ export default class extends Controller {
           if (data.action === 'segment_ready') {
             if (data.user_choice === 1) {
               console.log("changing the value of the value of the cache_id form input...")
-              this.cacheId1Target.value = data.cache_id;
+              this.cacheIdOneTarget.value = data.new_segment_hash;
               completed += 1;
             }
             if (data.user_choice === 2) {
               console.log("changing the value of the value of the cache_id form input...")
-              this.cacheId2Target.value = data.cache_id;
+              this.cacheIdTwoTarget.value = data.new_segment_hash;
               completed += 1;
             }
             if (completed === 2) {
-              this.submit1Target.disabled = false;
-              this.submit2Target.disabled = false;
+              console.log("Unlocking buttons")
+              this.submitOneTarget.disabled = false;
+              this.submitTwoTarget.disabled = false;
             }
           }
         }

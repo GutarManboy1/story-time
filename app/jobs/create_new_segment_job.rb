@@ -28,7 +28,7 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
     end # Big Bubba loop end tag
     user_hash = {
       role: "user",
-      content: input[:user_choice]
+      content: input[:user_choice].to_s
     }
     big_bubba << user_hash
     puts "MMMMMMMMMMMMMMMMMMMMMMMM Big Bubba successfully created."
@@ -63,8 +63,10 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
           new_segment_hash[:order] = root_order.to_i + 2
           new_segment_hash[:image] = url
           cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{input[:user_choice]}"
+          puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM Writing data to Rails cache"
           Rails.cache.write(cache_id, new_segment_hash, expires_in: 1.hour)
-          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash, cache_id: cache_id})
+          puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM Broadcasting the end of job #{input[:user_choice]}"
+          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash.to_json, cache_id: cache_id})
           # segment_params = {
           #   message: segment_message,
           #   role: 'assistant'
@@ -116,9 +118,9 @@ class CreateNewSegmentJob < ApplicationJob  # this job will put together a runni
           new_segment_hash[:role] = "assistant"
           new_segment_hash[:order] = root_order.to_i + 2
           new_segment_hash[:image] = url
-          cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{input[:user_choice]}"
+          p cache_id = "story_id#{story.id}:root_segment_id#{root_segment_id}:#{input[:user_choice]}"
           Rails.cache.write(cache_id, new_segment_hash, expires_in: 1.hour)
-          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash, cache_id: cache_id})
+          SegmentChannel.broadcast_to(root_segment, { action: 'segment_ready', user_choice: input[:user_choice], new_segment_hash: new_segment_hash.to_json, cache_id: cache_id})
         # picture_segment = CreateNewArtJob.perform_now({paragraphs: segment_data["paragraphs"].join(" "), segment: new_segment_hash})
         # picture_segment.message = segment_message
         # picture_segment.role = "assistant"
