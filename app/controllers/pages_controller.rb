@@ -5,5 +5,8 @@ class PagesController < ApplicationController
 
   end
 
-  
+  def main
+    
+  end
+
 end
