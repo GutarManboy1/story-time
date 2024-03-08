@@ -25,7 +25,7 @@
     box-sizing: border-box;
     width: 80%;
     border-radius: 10px;
-    font-size: 1vw;
+    font-size: 22px;
     white-space: normal;
     word-wrap: break-word;
   }
@@ -47,6 +47,8 @@
 
   .choice-btn {
     white-space: normal;
+    font-size: 22px;
+    line-height: 1.2;
   }
 }
 
@@ -95,6 +97,7 @@
   cursor: pointer;
   white-space: normal;
   word-wrap: break-word;
+  line-height: 1.2;
 }
 
 .word-btn:hover {

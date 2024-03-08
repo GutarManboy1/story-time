@@ -1,11 +1,10 @@
-
 <div class="story-segment-show-page-container story-segment-book">
   <div class="story-row">
     <div class="story-column-left">
       <div class="story-segment-text" data-controller="word-lookup">
         <% if @story_segment.role == "assistant" %>
           <% @paragraphs.each_with_index do |paragraph, p_index| %>
-            <p class="d-flex justify-content-center" style="font-size: large;">
+            <p class="d-flex justify-content-center">
               <% paragraph.split(' ').each_with_index do |word, w_index| %>
                 <button data-controller="word-lookup"
                   data-action="click->word-lookup#showDefinition"
@@ -17,40 +16,6 @@
                 </button>
               <% end %>
             </p>
-            <% if p_index == @paragraphs.size - 1 && @next_segment.present? %>
-              <%= link_to 'Continue', story_segment_path(@next_segment), class: 'btn btn-primary'%>
-            <% elsif p_index == @paragraphs.size - 1 && @choices.present? %>
-              <div data-controller="segment-subscription" data-segment-subscription-segment-id-value="<%= @story_segment.id %>">
-                <div class="d-flex justify-content-center">
-                  <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
-                    <%= f.input :cache_id_1, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdOne" } } %>
-                    <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
-                    <%= f.input :choice, as: :hidden, input_html: { value: "1"} %>
-                    <%= f.submit @choices[0], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitOne" }, style: "font-size: large;" %>
-                  <% end %>
-                </div>
-                <div class="d-flex justify-content-center">
-                  <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
-                    <%= f.input :cache_id_2, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdTwo" } } %>
-                    <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
-                    <%= f.input :choice, as: :hidden, input_html: { value: "2"} %>
-                    <%= f.submit @choices[1], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitTwo" }, style: "font-size: large;" %>
-                  <% end %>
-                </div>
-              </div>
-            <% elsif  p_index == @paragraphs.size - 1 && !@choices.present? %>
-              <div class="container d-flex justify-content-center">
-                <h3>You have reached the end of the story.</h3>
-              </div>
-              <div class="d-flex justify-content-center">
-                <div class="pr-3">
-                  <%= link_to 'Back to Menu', root_path, class: 'btn btn-primary'%>
-                </div>
-                <div class="pl-3">
-                  <%= link_to 'Back to Book Cover', story_path(@story_segment.story), class: 'btn btn-primary' %>
-                </div>
-              </div>
-            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -63,13 +28,24 @@
         <% if @next_segment.present? %>
           <%= link_to 'Continue', story_segment_path(@next_segment), class: 'btn btn-primary'%>
         <% elsif @choices.present? %>
-          <% @choices.each_with_index do |choice, index| %>
-            <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
-              <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
-              <%= f.input :choice, as: :hidden, input_html: { value: "#{index + 1}"} %>
-              <%= f.submit choice, class: 'btn choice-btn', style: "font-size: large;" %>
-            <% end %>
-          <% end %>
+          <div data-controller="segment-subscription" data-segment-subscription-segment-id-value="<%= @story_segment.id %>">
+            <div class="d-flex justify-content-center">
+              <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+                <%= f.input :cache_id_1, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdOne" } } %>
+                <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
+                <%= f.input :choice, as: :hidden, input_html: { value: "1"} %>
+                <%= f.submit @choices[0], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitOne" }%>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-center">
+              <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+                <%= f.input :cache_id_2, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdTwo" } } %>
+                <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
+                <%= f.input :choice, as: :hidden, input_html: { value: "2"} %>
+                <%= f.submit @choices[1], class: 'btn choice-btn', disabled: true, data: { segment_subscription_target: "submitTwo" } %>
+              <% end %>
+            </div>
+          </div>
         <% elsif !@choices.present? %>
           <div class="container d-flex justify-content-center">
             <h3>You have reached the end of the story.</h3>
