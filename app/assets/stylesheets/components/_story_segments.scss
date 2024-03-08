@@ -16,18 +16,25 @@
 
 .story-column-left {
   width: 50%;
-  padding: 10px;
+  padding: 12px;
 
   .story-segment-text {
-    margin-left: 21%;
+    margin-left: 27%;
     color: white;
-    padding: 20px;
+    padding-top: 2%;
+    padding-right: 10%;
     box-sizing: border-box;
     width: 80%;
     border-radius: 10px;
     font-size: 22px;
     white-space: normal;
     word-wrap: break-word;
+  }
+
+  .paragraph-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
   }
 }
 .story-column-right {
