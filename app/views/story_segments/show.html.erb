@@ -3,8 +3,9 @@
     <div class="story-column-left">
       <div class="story-segment-text" data-controller="word-lookup">
         <% if @story_segment.role == "assistant" %>
-          <% @paragraphs.each_with_index do |paragraph, p_index| %>
-            <p class="d-flex justify-content-center">
+        <div class="segment-text-box">
+        <% @paragraphs.each_with_index do |paragraph, p_index| %>
+            <p class="paragraph-div">
               <% paragraph.split(' ').each_with_index do |word, w_index| %>
                 <button data-controller="word-lookup"
                   data-action="click->word-lookup#showDefinition"
@@ -17,6 +18,9 @@
               <% end %>
             </p>
           <% end %>
+        </div>
+
+
         <% end %>
       </div>
     </div>
