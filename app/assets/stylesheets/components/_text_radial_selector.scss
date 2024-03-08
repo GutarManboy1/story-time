@@ -9,19 +9,35 @@
     left: -9999px;
   }
 
-  input[type=radio]:checked + label>h2 {
+  input[type=radio]:checked + label>h2{
     border-bottom: 3px solid transparent;
     border-image: linear-gradient(to right, rgba(255, 0, 102, 0) 0%, #161f2200 10%, #A2E7FF 20%, #A2E7FF 80%, #161f2200 90%, rgba(255, 204, 0, 0) 100%); /* Define the gradient */
     border-image-slice: 1;
     color: #A2E7FF;
   }
 
-  input[type=radio] + label>h2 {
+  input[type=radio] + label>h2{
     transition: 500ms all;
     color: #161F22;
   }
 
-  input[type=radio]:checked + label>h2 {
+  input[type=radio]:checked + label>h2{
+    transform: scale(120%)
+  }
+
+  input[type=radio]:checked + label>h3{
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, rgba(255, 0, 102, 0) 0%, #161f2200 10%, #A2E7FF 20%, #A2E7FF 80%, #161f2200 90%, rgba(255, 204, 0, 0) 100%); /* Define the gradient */
+    border-image-slice: 1;
+    color: #A2E7FF;
+  }
+
+  input[type=radio] + label>h3{
+    transition: 500ms all;
+    color: #161F22;
+  }
+
+  input[type=radio]:checked + label>h3{
     transform: scale(120%)
   }
 }
