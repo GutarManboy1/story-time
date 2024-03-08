@@ -2,18 +2,56 @@
   <!-- CSRF Token for security -->
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
+<%# <input
+  type="radio" name="emotion"
+  id="sad" class="input-hidden" />
+<label for="sad">
+  <img
+    src="//placekitten.com/150/150"
+    alt="I'm sad" />
+</label>
+
+<input
+  type="radio" name="emotion"
+  id="happy" class="input-hidden" />
+<label for="happy">
+  <img
+    src="//placekitten.com/151/151"
+    alt="I'm happy" />
+</label> %>
+
   <!-- Genre dropdown -->
   <label for="genre">Genre:</label>
-  <select name="genre" id="genre" class="drop-select">
-    <option value="" disabled selected>Select a Genre</option>
-    <option value="Adventure">Adventure</option>
-    <option value="Fairy Tale">Fairy Tale</option>
-    <option value="Fantasy">Fantasy</option>
-    <option value="Horror">Horror</option>
-    <option value="Love">Love</option>
-    <option value="Mystery">Mystery</option>
-    <option value="Sci-Fi">Sci-Fi</option>
-  </select>
+  <fieldset name="genre" class="image-radial-selector">
+    <input type="radio" name="choice" id="adventure" class="input-hidden"/>
+    <label for="adventure">
+      <%= image_tag "mountain_icon.png", alt: "adventure story button" %>
+    </label>
+    <input type="radio" name="choice" id="fairy-tale" class="input-hidden"/>
+    <label for="fairy-tale">
+      <%= image_tag "castle_icon.png", alt: "fairy-tale story button" %>
+    </label>
+    <input type="radio" name="choice" id="romance" class="input-hidden"/>
+    <label for="romance">
+      <%= image_tag "heart_icon.png", alt: "romance story button" %>
+    </label>
+    <input type="radio" name="choice" id="sci-fi" class="input-hidden"/>
+    <label for="sci-fi">
+      <%= image_tag "robot_icon.png", alt: "sci-fi story button" %>
+    </label>
+    <input type="radio" name="choice" id="horror" class="input-hidden"/>
+    <label for="horror">
+      <%= image_tag "skull_icon.png", alt: "horror story button" %>
+    </label>
+    <input type="radio" name="choice" id="fantasy" class="input-hidden"/>
+    <label for="fantasy">
+      <%= image_tag "dragon_icon.png", alt: "fantasy story button" %>
+    </label>
+    <input type="radio" name="choice" id="mystery" class="input-hidden"/>
+    <label for="mystery">
+      <%= image_tag "stranger_icon.png", alt: "mystery story button" %>
+    </label>
+  </fieldset>
 
   <label for="length">Length:</label>
   <select name="length" id="length" class="drop-select">
