@@ -58,6 +58,12 @@ h1 {
     >.back {
       opacity: 1;
       transform: rotateY(0deg);
+
+      p {
+        font-size: 1.5rem;
+        color: white;
+        line-height: 105%
+      }
     }
   }
 
@@ -99,7 +105,7 @@ h1 {
     border-radius: 10px;
 
     p {
-      font-size: 0.9125rem;
+      // font-size: 0.9125rem;
       line-height: 160%;
       color: #999;
     }
