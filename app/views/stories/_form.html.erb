@@ -2,25 +2,8 @@
   <!-- CSRF Token for security -->
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-<%# <input
-  type="radio" name="emotion"
-  id="sad" class="input-hidden" />
-<label for="sad">
-  <img
-    src="//placekitten.com/150/150"
-    alt="I'm sad" />
-</label>
 
-<input
-  type="radio" name="emotion"
-  id="happy" class="input-hidden" />
-<label for="happy">
-  <img
-    src="//placekitten.com/151/151"
-    alt="I'm happy" />
-</label> %>
 
-  <!-- Genre dropdown -->
   <label for="genre">Genre:</label>
   <fieldset name="genre" class="image-radial-selector">
     <input type="radio" name="choice" id="adventure" class="input-hidden"/>
@@ -53,21 +36,37 @@
     </label>
   </fieldset>
 
-  <label for="length">Length:</label>
-  <select name="length" id="length" class="drop-select">
-    <option value="" disabled selected>Select Length</option>
-    <option value="Short">Short</option>
-    <option value="Medium">Medium</option>
-    <option value="Long">Long</option>
-  </select>
+ <label for="length">Story Length:</label>
+  <fieldset name="length" class="text-radial-selector">
+    <input type="radio" name="choice 2" id="short" class="input-hidden"/>
+    <label for="short">
+      <h2><strong>Short</strong></h2>
+    </label>
+    <input type="radio" name="choice 2" id="medium" class="input-hidden"/>
+    <label for="medium">
+      <h2><strong>Medium</strong></h2>
+    </label>
+    <input type="radio" name="choice 2" id="long" class="input-hidden"/>
+    <label for="long">
+      <h2><strong>Long</strong></h2>
+    </label>
+  </fieldset>
 
-  <label for="difficulty">Difficulty:</label>
-  <select name="difficulty" id="difficulty" class="drop-select">
-    <option value="" disabled selected>Select Difficulty</option>
-    <option value="Beginner">Beginner</option>
-    <option value="Intermediate">Intermediate</option>
-    <option value="Advanced">Advanced</option>
-  </select>
+ <label for="difficulty">English Difficulty:</label>
+  <fieldset name="difficulty" class="text-radial-selector">
+    <input type="radio" name="choice 3" id="beginner" class="input-hidden"/>
+    <label for="beginner">
+      <h3><strong>Beginner</strong></h3>
+    </label>
+    <input type="radio" name="choice 3" id="intermediate" class="input-hidden"/>
+    <label for="intermediate">
+      <h3><strong>Intermediate</strong></h3>
+    </label>
+    <input type="radio" name="choice 3" id="advanced" class="input-hidden"/>
+    <label for="advanced">
+      <h3><strong>Advanced</strong></h3>
+    </label>
+  </fieldset>
 
   <label for="themes">Story Themes: (separated by commas)</label>
   <textarea name="themes" id="themes" class="text-input" placeholder="Example: a purple giraffe, a man named Rolo, the best coffee in the world"></textarea>
