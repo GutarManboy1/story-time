@@ -12,14 +12,15 @@
     <% end %>
   </div>
   <!--Flashcards-->
+  <div class="flash-cards-container">
   <% @flashcards.each do |flashcard|%>
     <div class="flip">
       <div class="front" style="background-color: #ECE9EA ">
-        <h1 class=""><%= flashcard.excerpt %></h1>
+        <h2 class=""><%= flashcard.excerpt %></h2>
       </div>
       <div class="back" style="background-color: #3F5A64">
-        <h2><%= flashcard.answer %></h2>
-        <h3><%=  %></h3>
+        <p><%= flashcard.answer %></p>
       </div>
     </div>
   <% end %>
+  </div>
