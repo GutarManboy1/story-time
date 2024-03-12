@@ -6,7 +6,7 @@
 #
 # The application 'sidekiq' is installed as part of a gem, and
 # this file is here to facilitate running it.
-#
+# adding a comment here to overwrite my little mistake... oops
 
 ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../Gemfile", __dir__)
 
