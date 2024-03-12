@@ -3,3 +3,4 @@ class AddAdminToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :admin, :boolean, null: false, default: false
   end
 end
+#needed for certain heroku features to work.
