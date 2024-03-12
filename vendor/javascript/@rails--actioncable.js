@@ -3,6 +3,7 @@ var adapters = {
   WebSocket: typeof WebSocket !== "undefined" ? WebSocket : undefined
 };
 
+
 var logger = {
   log(...messages) {
     if (this.enabled) {
